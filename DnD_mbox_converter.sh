@@ -1,41 +1,35 @@
 #!/bin/bash
-# Shell script for mbox_converter
-# Usage: Drag & drop an .mbox file onto this .sh file (in supporting file managers)
-#        Or run via: ./mbox_converter.sh /path/to/file.mbox
 
-set -e
+# Batch file for Poetry-based mbox_converter
+# Usage: ./run-mbox-converter.sh path/to/file.mbox
 
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-VENV_DIR="$SCRIPT_DIR/.venv"
+# Get the full path of the .mbox file
 MBOX_FILE="$1"
 
-# Check if a file was provided
-if [ -z "$MBOX_FILE" ]; then
-  echo "[ERROR] Please provide an .mbox file (drag-and-drop or as an argument)."
+if [[ -z "$MBOX_FILE" ]]; then
+  echo "[ERROR] Please pass an .mbox file as argument."
+  echo "Usage: ./run-mbox-converter.sh /path/to/example.mbox"
   exit 1
 fi
 
-# Step 1: Create virtual environment if it doesn't exist
-if [ ! -f "$VENV_DIR/bin/activate" ]; then
-  echo "[INFO] Creating virtual environment at $VENV_DIR ..."
-  python3 -m venv "$VENV_DIR"
+# Move to the script's directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR" || exit 1
+
+# Check if Poetry is installed
+if ! command -v poetry &> /dev/null; then
+  echo "[ERROR] Poetry is not installed. Please install Poetry first:"
+  echo "https://python-poetry.org/docs/#installation"
+  exit 1
 fi
 
-# Step 2: Activate virtual environment
-# shellcheck disable=SC1090
-source "$VENV_DIR/bin/activate"
+# Install dependencies (if not already installed)
+echo "[INFO] Installing dependencies via Poetry ..."
+poetry install --no-interaction --no-root
 
-# Step 3: Install dependencies if requirements.txt exists
-if [ -f "$SCRIPT_DIR/requirements.txt" ]; then
-  echo "[INFO] Installing dependencies ..."
-  pip install -r "$SCRIPT_DIR/requirements.txt"
-else
-  echo "[WARNING] requirements.txt not found!"
-fi
-
-# Step 4: Run the CLI parser
-echo "[INFO] Running parser..."
-python -m mbox_converter.cli "$MBOX_FILE"
+# Run the script
+echo "[INFO] Running mbox_converter ..."
+poetry run python -m mbox_converter.cli "$MBOX_FILE"
 
 echo
 echo "Done processing: $MBOX_FILE"
