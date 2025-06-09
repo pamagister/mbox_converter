@@ -15,9 +15,7 @@ from mbox_converter.base import MboxConverter
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(
-        description="Parse mbox file and export to text or CSV."
-    )
+    parser = argparse.ArgumentParser(description="Parse mbox file and export to text or CSV.")
     parser.add_argument(
         "--from",
         dest="from_",

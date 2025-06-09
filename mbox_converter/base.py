@@ -13,13 +13,13 @@ from email_reply_parser import EmailReplyParser
 
 NAME = "mbox_converter"
 
-'''
+"""
 generate a gui application
 
 pip install pyinstaller
 pyinstaller --onefile --windowed mbox_converter_gui.py
 
-'''
+"""
 
 
 def parse_date(date_header, date_format):
@@ -37,15 +37,15 @@ def parse_date(date_header, date_format):
 
 def decode_mime_header(value):
     if not value:
-        return ''
+        return ""
     decoded_fragments = decode_header(value)
-    result = ''
+    result = ""
     for text, encoding in decoded_fragments:
         if isinstance(text, bytes):
             try:
-                result += text.decode(encoding or 'utf-8', errors='replace')
+                result += text.decode(encoding or "utf-8", errors="replace")
             except Exception:
-                result += text.decode('utf-8', errors='replace')
+                result += text.decode("utf-8", errors="replace")
         else:
             result += text
     return result
@@ -59,25 +59,23 @@ def clean_content(content_bytes):
         content_str = content_bytes.decode("iso-8859-1", errors="replace")
     try:
         soup = BeautifulSoup(content_str, "html.parser")
-        return ''.join(soup.find_all(string=True))
+        return "".join(soup.find_all(string=True))
     except Exception:
-        return ''
+        return ""
 
 
 def extract_content(email):
     for part in email.walk():
-        if part.get_content_maintype() == 'multipart':
+        if part.get_content_maintype() == "multipart":
             continue
         content = part.get_payload(decode=True)
         if content:
             return EmailReplyParser.parse_reply(clean_content(content))
-    return ''
+    return ""
 
 
 def extract_emails(field):
-    matches = re.findall(
-        r'\<?([a-zA-Z0-9_\-.]+@[a-zA-Z0-9_\-.]+\.[a-zA-Z]{2,5})\>?', str(field)
-    )
+    matches = re.findall(r"\<?([a-zA-Z0-9_\-.]+@[a-zA-Z0-9_\-.]+\.[a-zA-Z]{2,5})\>?", str(field))
     unique_emails = sorted(set(match.lower() for match in matches))
     return unique_emails
 
@@ -109,41 +107,31 @@ class MboxConverter:
     def build_txt_output(self, email):
         lines = []
         if self.include_options["from"]:
-            lines.append(
-                "From: {}".format(', '.join(extract_emails(email.get("from", ""))))
-            )
+            lines.append("From: {}".format(", ".join(extract_emails(email.get("from", "")))))
         if self.include_options["to"]:
-            lines.append(
-                "To: {}".format(', '.join(extract_emails(email.get("to", ""))))
-            )
+            lines.append("To: {}".format(", ".join(extract_emails(email.get("to", "")))))
         if self.include_options["date"]:
             date_str = parse_date(email.get("date"), self.date_format)
             lines.append("Date: {}".format(date_str or "Unknown"))
         if self.include_options["subject"]:
-            lines.append(
-                "Subject: {}".format(decode_mime_header(email.get("subject", "")))
-            )
+            lines.append("Subject: {}".format(decode_mime_header(email.get("subject", ""))))
         content = extract_content(email)
-        lines.append('\n' + content + '\n-----\n\n')
+        lines.append("\n" + content + "\n-----\n\n")
         return "\n".join(lines)
 
     def build_csv_output(self, email, email_date_str):
         fields = []
         if self.include_options["from"]:
-            fields.append(
-                '"{}"'.format(', '.join(extract_emails(email.get("from", ""))))
-            )
+            fields.append('"{}"'.format(", ".join(extract_emails(email.get("from", "")))))
         if self.include_options["to"]:
-            fields.append('"{}"'.format(', '.join(extract_emails(email.get("to", "")))))
+            fields.append('"{}"'.format(", ".join(extract_emails(email.get("to", "")))))
         if self.include_options["date"]:
             fields.append('"{}"'.format(email_date_str or ""))
         if self.include_options["subject"]:
             fields.append(
-                '"{}"'.format(
-                    decode_mime_header(email.get("subject", "")).replace('"', '""')
-                )
+                '"{}"'.format(decode_mime_header(email.get("subject", "")).replace('"', '""'))
             )
-        content = extract_content(email).replace('"', '""').replace('\n', ' ').strip()
+        content = extract_content(email).replace('"', '""').replace("\n", " ").strip()
         fields.append(f'"{content}"')
         return fields
 
@@ -169,9 +157,7 @@ class MboxConverter:
         for timestamp, email in emails:
             email_date_str = parse_date(email.get("date"), self.date_format)
             if email_date_str:
-                email_date = datetime.datetime.strptime(
-                    email_date_str, self.date_format
-                )
+                email_date = datetime.datetime.strptime(email_date_str, self.date_format)
             else:
                 email_date = datetime.datetime.min
 
@@ -213,6 +199,4 @@ class MboxConverter:
 
         if f:
             f.close()
-        print(
-            f"Generated output for {row_written} messages into {file_index - 1} file(s)."
-        )
+        print(f"Generated output for {row_written} messages into {file_index - 1} file(s).")

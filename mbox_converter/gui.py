@@ -5,7 +5,7 @@ import os
 from mbox_converter.base import MboxConverter
 
 
-class MboxConverter:
+class MboxConverterGui:
     def __init__(self, root):
         self.root = root
         self.root.title("Mbox Converter")
@@ -27,15 +27,11 @@ class MboxConverter:
         # MBOX selection
         tk.Label(frame, text="MBOX File:").grid(row=0, column=0, sticky="w")
         tk.Entry(frame, textvariable=self.mbox_path, width=40).grid(row=0, column=1)
-        tk.Button(frame, text="Browse...", command=self.select_file).grid(
-            row=0, column=2
-        )
+        tk.Button(frame, text="Browse...", command=self.select_file).grid(row=0, column=2)
 
         # Format dropdown
         tk.Label(frame, text="Output Format:").grid(row=1, column=0, sticky="w")
-        tk.OptionMenu(frame, self.format, "txt", "csv").grid(
-            row=1, column=1, sticky="w"
-        )
+        tk.OptionMenu(frame, self.format, "txt", "csv").grid(row=1, column=1, sticky="w")
 
         # Checkboxes
         tk.Checkbutton(frame, text="Include From", variable=self.include_from).grid(
@@ -47,24 +43,22 @@ class MboxConverter:
         tk.Checkbutton(frame, text="Include Date", variable=self.include_date).grid(
             row=4, column=0, sticky="w"
         )
-        tk.Checkbutton(
-            frame, text="Include Subject", variable=self.include_subject
-        ).grid(row=5, column=0, sticky="w")
+        tk.Checkbutton(frame, text="Include Subject", variable=self.include_subject).grid(
+            row=5, column=0, sticky="w"
+        )
 
         # Max Days
-        tk.Label(frame, text="Max Days per File:").grid(
-            row=6, column=0, sticky="w"
-        )
-        tk.Entry(frame, textvariable=self.max_days, width=40).grid(
-            row=6, column=1, sticky="w"
-        )
-        tk.Label(frame, text="blank = unlimited").grid(
-            row=6, column=2, sticky="w"
-        )
+        tk.Label(frame, text="Max Days per File:").grid(row=6, column=0, sticky="w")
+        tk.Entry(frame, textvariable=self.max_days, width=40).grid(row=6, column=1, sticky="w")
+        tk.Label(frame, text="blank = unlimited").grid(row=6, column=2, sticky="w")
 
         # Run Button
         tk.Button(
-            frame, text="Run Converter", command=self.run_parser, bg="#4CAF50", fg="white"
+            frame,
+            text="Run Converter",
+            command=self.run_parser,
+            bg="#4CAF50",
+            fg="white",
         ).grid(row=9, column=1, columnspan=1, pady=10)
 
     def select_file(self):
@@ -103,5 +97,5 @@ class MboxConverter:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    gui = MboxConverter(root)
+    gui = MboxConverterGui(root)
     root.mainloop()
