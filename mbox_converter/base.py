@@ -1,11 +1,3 @@
-"""
-mbox_converter base module.
-
-"""
-
-NAME = "mbox_converter"
-
-
 import datetime
 import mailbox
 import os
@@ -18,6 +10,8 @@ from math import inf
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from email_reply_parser import EmailReplyParser
+
+NAME = "mbox_converter"
 
 '''
 generate a gui application
