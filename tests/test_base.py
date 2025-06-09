@@ -27,8 +27,8 @@ def test_base():
 
 
 def test_parse_date_valid():
-    date_str = 'Mon, 05 Jun 2023 12:34:56 +0000'
-    assert parse_date(date_str, "%Y-%m-%d") == '2023-06-05'
+    date_str = "Mon, 05 Jun 2023 12:34:56 +0000"
+    assert parse_date(date_str, "%Y-%m-%d") == "2023-06-05"
 
 
 def test_parse_date_invalid():
@@ -51,7 +51,7 @@ def test_clean_content_html():
 
 def test_extract_emails_basic():
     field = "John Doe <john@example.com>, jane.doe@example.org"
-    assert extract_emails(field) == ['jane.doe@example.org', 'john@example.com']
+    assert extract_emails(field) == ["jane.doe@example.org", "john@example.com"]
 
 
 # ------------------------------
@@ -71,7 +71,7 @@ def mock_email():
     email.walk.return_value = [
         Mock(
             get_payload=lambda decode: b"Hello\nReply",
-            get_content_maintype=lambda: 'text',
+            get_content_maintype=lambda: "text",
         )
     ]
     return email
@@ -108,7 +108,7 @@ def test_parse_creates_output(mock_open, mock_mbox, mocker):
         "subject": "Test",
     }.get(x, d)
     fake_email.walk.return_value = [
-        Mock(get_payload=lambda decode: b"Text", get_content_maintype=lambda: 'text')
+        Mock(get_payload=lambda decode: b"Text", get_content_maintype=lambda: "text")
     ]
 
     mock_mbox.return_value = [fake_email]
@@ -138,7 +138,7 @@ def test_max_days_split(mocker):
         "subject": "Second",
     }.get(x, d)
     email1.walk.return_value = email2.walk.return_value = [
-        Mock(get_payload=lambda decode: b"Text", get_content_maintype=lambda: 'text')
+        Mock(get_payload=lambda decode: b"Text", get_content_maintype=lambda: "text")
     ]
 
     mocker.patch("mbox_converter.base.mailbox.mbox", return_value=[(email1), (email2)])
