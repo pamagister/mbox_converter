@@ -1,11 +1,12 @@
-![Github CI Status](https://github.com/pamagister/mbox_converter/actions/workflows/main.yml/badge.svg)
-![GitHub release](https://img.shields.io/github/v/release/pamagister/mbox_converter)
-![License](https://img.shields.io/github/license/pamagister/mbox_converter)
-![GitHub issues](https://img.shields.io/github/issues/pamagister/mbox_converter)
-![PyPI](https://img.shields.io/pypi/v/mbox_converter)
+[![Github CI Status](https://github.com/pamagister/mbox_converter/actions/workflows/main.yml/badge.svg)](https://github.com/pamagister/mbox_converter/actions)
+[![GitHub release](https://img.shields.io/github/v/release/pamagister/mbox_converter)](https://github.com/pamagister/mbox_converter/releases)
+[![License](https://img.shields.io/github/license/pamagister/mbox_converter)](https://github.com/pamagister/mbox_converter/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/pamagister/mbox_converter)](https://github.com/pamagister/mbox_converter/issues)
+[![PyPI](https://img.shields.io/pypi/v/mbox_converter)](https://pypi.org/project/mbox_converter/)
 
 
-# MBOX Parser
+
+# MBOX Converter
 
 A Python script for parsing and structured export of `.mbox` files.
 Supports output in text or CSV format with optional on/off email fields.
@@ -13,7 +14,7 @@ Useful for analyzing, archiving or further processing e-mail correspondence.
 
 ## 🔽 Download installer
 
-- [⬇️ Download for Windows](https://github.com/pamagister/mbox_converter/releases/latest/download/MboxConverter-win.exe)
+- [⬇️ Download for Windows](https://github.com/pamagister/mbox_converter/releases/latest/download/MboxConverter-win.zip)
 - [⬇️ Download for macOS](https://github.com/pamagister/mbox_converter/releases/latest/download/MboxConverter-macOS.zip)
 
 
@@ -113,7 +114,7 @@ Certainly! Here's an additional chapter you can include in your `README.md` file
 
 ## 🖱️ Usage by Drag-and-Drop
 
-You can also run the parser conveniently by dragging and dropping `.mbox` files onto the provided startup scripts. This is especially useful for non-technical users or quick one-off processing.
+You can also run the Converter conveniently by dragging and dropping `.mbox` files onto the provided startup scripts. This is especially useful for non-technical users or quick one-off processing.
 
 ---
 
@@ -129,7 +130,7 @@ You can also run the parser conveniently by dragging and dropping `.mbox` files 
 
    * create a virtual environment (if not already present),
    * install all dependencies,
-   * run the parser with default options.
+   * run the Converter with default options.
 
 > 💡 Output files will be created in the same directory, with names like `example_001.txt` or `example_001.csv`.
 
@@ -163,14 +164,14 @@ You can also run the parser conveniently by dragging and dropping `.mbox` files 
 
    * create and activate a `.venv` if needed,
    * install requirements,
-   * and run the parser on the file.
+   * and run the Converter on the file.
 
 ---
 
 ### 📝 Notes
 
 * The `.venv` directory will be reused across runs.
-* You can modify the batch or shell script to hard-code specific parser options (like `--format csv`), if desired.
+* You can modify the batch or shell script to hard-code specific Converter options (like `--format csv`), if desired.
 
 Let me know if you’d like a version that includes GUI elements (e.g., file picker dialogs).
 
@@ -181,8 +182,5 @@ Let me know if you’d like a version that includes GUI elements (e.g., file pic
 - [Installing packages using pip and virtual environments](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
 - A tutorial on working with [Virtual Environments and Packages](https://docs.python.org/3/tutorial/venv.html)
 - [A Guide to Python’s Virtual Environments](https://towardsdatascience.com/virtual-environments-104c62d48c54)
-- [Email Address and MIME Parsing](https://github.com/mailgun/flanker)
-- [Signature Stripping Solution](https://github.com/mailgun/talon)
 - [MBOX Parsing Example: Mining the Social](https://www.oreilly.com/library/view/mining-the-social/9781449368180/ch06.html)
-- [Gmail MBOX Parser](https://github.com/alejandro-g-m/Gmail-MBOX-email-parser)
-- [Mail Parser Package](https://pypi.org/project/mail-parser/)
+
