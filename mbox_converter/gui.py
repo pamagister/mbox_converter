@@ -2,13 +2,13 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 import os
 
-from mbox_converter.base import MboxParser
+from mbox_converter.base import MboxConverter
 
 
-class MboxParserGUI:
+class MboxConverter:
     def __init__(self, root):
         self.root = root
-        self.root.title("Mbox Parser GUI")
+        self.root.title("Mbox Converter")
 
         self.mbox_path = tk.StringVar()
         self.format = tk.StringVar(value="txt")
@@ -64,7 +64,7 @@ class MboxParserGUI:
 
         # Run Button
         tk.Button(
-            frame, text="Run Parser", command=self.run_parser, bg="#4CAF50", fg="white"
+            frame, text="Run Converter", command=self.run_parser, bg="#4CAF50", fg="white"
         ).grid(row=9, column=1, columnspan=1, pady=10)
 
     def select_file(self):
@@ -84,7 +84,7 @@ class MboxParserGUI:
             messagebox.showerror("Error", "Max Days must be a number.")
             return
 
-        parser = MboxParser(
+        parser = MboxConverter(
             mbox_file=path,
             output_format=self.format.get(),
             include_from=self.include_from.get(),
@@ -103,5 +103,5 @@ class MboxParserGUI:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    gui = MboxParserGUI(root)
+    gui = MboxConverter(root)
     root.mainloop()

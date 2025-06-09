@@ -11,7 +11,7 @@ Be creative! do whatever you want!
 import argparse
 from math import inf
 
-from mbox_converter.base import MboxParser
+from mbox_converter.base import MboxConverter
 
 
 def parse_arguments():
@@ -76,7 +76,7 @@ def main():
         * Run an application (Flask, FastAPI, Django, etc.)
     """
     args = parse_arguments()
-    parser = MboxParser(
+    parser = MboxConverter(
         mbox_file=args.mbox_file,
         include_from=args.from_ == "ON",
         include_to=args.to == "ON",

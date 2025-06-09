@@ -88,7 +88,7 @@ def extract_emails(field):
     return unique_emails
 
 
-class MboxParser:
+class MboxConverter:
     def __init__(
         self,
         mbox_file,
