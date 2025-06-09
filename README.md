@@ -1,4 +1,9 @@
-![Run Python Tests](https://github.com/pamagister/mbox_converter/actions/workflows/main.yml/badge.svg)
+![Github CI Status](https://github.com/pamagister/mbox_converter/actions/workflows/main.yml/badge.svg)
+![GitHub release](https://img.shields.io/github/v/release/pamagister/mbox_converter)
+![License](https://img.shields.io/github/license/pamagister/mbox_converter)
+![GitHub issues](https://img.shields.io/github/issues/pamagister/mbox_converter)
+![PyPI](https://img.shields.io/pypi/v/mbox_converter)
+
 
 # MBOX Parser
 
@@ -8,8 +13,8 @@ Useful for analyzing, archiving or further processing e-mail correspondence.
 
 ## 🔽 Download installer
 
-- [⬇️ Download for Windows](https://github.com/pamagister/mbox-gmail-parser/releases/latest/download/MboxParserGUI.exe)
-- [⬇️ Download for macOS](https://github.com/pamagister/mbox-gmail-parser/releases/latest/download/MboxParserGUI-macOS.zip)
+- [⬇️ Download for Windows](https://github.com/pamagister/mbox_converter/releases/latest/download/MboxConverter-win.exe)
+- [⬇️ Download for macOS](https://github.com/pamagister/mbox_converter/releases/latest/download/MboxConverter-macOS.zip)
 
 
 ## Run from source code
