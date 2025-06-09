@@ -1,5 +1,6 @@
 # These requirements are for development and testing only, not for production.
 pytest
+pytest-mock
 coverage
 flake8
 black
