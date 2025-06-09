@@ -1,4 +1,4 @@
-[![Run Python Tests](https://github.com/pamagister/mbox_converter/actions/workflows/python-tests.yml/badge.svg)](https://github.com/maxmustermann/mbox-parser/actions/workflows/python-tests.yml)
+![Run Python Tests](https://github.com/pamagister/mbox_converter/actions/workflows/main.yml/badge.svg)
 
 # MBOX Parser
 
