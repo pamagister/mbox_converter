@@ -46,13 +46,13 @@ jobs:
       - name: Run linter
         run: make lint
 
-  tests_linux:
+  tests_linux_macos:
     needs: linter
     strategy:
       fail-fast: false
       matrix:
         python-version: [3.9]
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
