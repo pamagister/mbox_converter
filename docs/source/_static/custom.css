@@ -1,0 +1,5 @@
+/* docs/_static/custom.css */
+.wy-nav-content {
+    max-width: 1000px;  /* z.B. 1000px oder sogar 90% */
+    margin: 0 auto;
+}
