@@ -227,7 +227,7 @@ See also
    (Github Actions will process the template and commit to your new repo)
 4. If you want [codecov](https://about.codecov.io/sign-up/) Reports and Automatic Release to [PyPI](https://pypi.org)  
   On the new repository `settings->secrets` add your `PYPI_API_TOKEN` and `CODECOV_TOKEN` (get the tokens on respective websites)
-4. Read the file [CONTRIBUTING.md](CONTRIBUTING.md)
+4. Read the file [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 5. Then clone your new project and happy coding!
 
 > **NOTE**: **WAIT** until first CI run on github actions before cloning your new project.
@@ -291,4 +291,4 @@ $ mbox_converter
 
 ## Development
 
-Read the [CONTRIBUTING.md](CONTRIBUTING.md) file.
+Read the [CONTRIBUTING.md](docs/CONTRIBUTING.md) file.
