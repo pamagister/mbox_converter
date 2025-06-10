@@ -5,7 +5,16 @@ description: Setup poetry environment
 runs:
   using: "composite"
   steps:
-    - run: curl -sSL https://install.python-poetry.org | python3
+    # Linux / macOS
+    - if: runner.os != 'Windows'
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
       shell: bash
-    - run: echo "$HOME/.local/bin" >> $GITHUB_PATH
-      shell: bash
+
+    # Windows
+    - if: runner.os == 'Windows'
+      run: |
+        (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
+        echo "${env:USERPROFILE}\AppData\Roaming\Python\Scripts" >> $Env:GITHUB_PATH
+      shell: powershell
