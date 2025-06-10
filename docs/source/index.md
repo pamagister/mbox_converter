@@ -27,3 +27,10 @@ or run it directly with:
 poetry run mbox-converter input.mbox --output-format csv
 ```
 
+```{toctree}
+:maxdepth: 2
+:caption: Contents
+
+install
+cli
+contributing
