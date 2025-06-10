@@ -1,0 +1,11 @@
+name: Setup Poetry
+
+description: Setup poetry environment
+
+runs:
+  using: "composite"
+  steps:
+    - run: curl -sSL https://install.python-poetry.org | python3
+      shell: bash
+    - run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+      shell: bash
