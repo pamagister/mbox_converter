@@ -30,6 +30,10 @@ jobs:
       - name: Setup Poetry
         uses: ./.github/actions/setup-poetry  # Composite Action
 
+      - name: Check poetry setup
+        run: |
+          poetry --version
+
       - name: Install dependencies
         run: poetry install --with dev
 

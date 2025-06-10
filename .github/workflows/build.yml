@@ -17,13 +17,18 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: '3.9'
 
       - name: Setup Poetry
         uses: ./.github/actions/setup-poetry  # Composite Action
 
+      - name: Check poetry setup
+        run: |
+          poetry --version
+
       - name: Install dependencies
-        run: poetry install --with dev
+        run: |
+          poetry install --with dev
 
       - name: Build EXE with PyInstaller
         run: |
