@@ -17,7 +17,7 @@ runs:
         version: "latest"
 
     - name: Create virtual environment
-      run: uv venv .venv --python ${{ matrix.python-version }}
+      run: uv venv .venv --python ${{ inputs.python-version }}
       shell: bash
 
     - name: Activate virtual environment
