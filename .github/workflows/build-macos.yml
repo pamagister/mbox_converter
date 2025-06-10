@@ -19,19 +19,12 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Setup Poetry
-        uses: ./.github/actions/setup-poetry  # Composite Action
-
-      - name: Check poetry setup
-        run: |
-          poetry --version
-
-      - name: Install dependencies
-        run: poetry install --with dev
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment  # Composite Action
 
       - name: Build macOS Executable with PyInstaller
         run: |
-          poetry run pyinstaller --onefile mbox_converter/cli.py --name MboxConverter
+          uv run pyinstaller --onefile mbox_converter/cli.py --name MboxConverter
 
       - name: Prepare ZIP file for release
         run: |
