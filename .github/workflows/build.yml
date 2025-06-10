@@ -19,18 +19,15 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Setup Poetry
+        uses: ./.github/actions/setup-poetry  # Composite Action
+
       - name: Install dependencies
-        run: |
-          python -m venv venv
-          venv\Scripts\activate
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pyinstaller
+        run: poetry install --with dev
 
       - name: Build EXE with PyInstaller
         run: |
-          venv\Scripts\activate
-          pyinstaller --onefile mbox_converter/cli.py --name MboxConverter
+          poetry run pyinstaller --onefile mbox_converter/cli.py --name MboxConverter
 
       - name: Prepare ZIP file for release
         run: |
