@@ -470,17 +470,19 @@ dev = [
     { name = "black" },
     { name = "coverage" },
     { name = "flake8" },
-    { name = "furo" },
     { name = "gitchangelog" },
     { name = "isort" },
     { name = "mkdocs" },
     { name = "mypy" },
-    { name = "myst-parser", version = "3.0.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
-    { name = "myst-parser", version = "4.0.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
     { name = "pyinstaller" },
     { name = "pytest" },
     { name = "pytest-cov" },
     { name = "pytest-mock" },
+]
+docs = [
+    { name = "furo" },
+    { name = "myst-parser", version = "3.0.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
+    { name = "myst-parser", version = "4.0.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
     { name = "sphinx", version = "7.4.7", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "sphinx", version = "8.1.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.10.*'" },
     { name = "sphinx", version = "8.2.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
@@ -493,22 +495,22 @@ requires-dist = [
     { name = "coverage", marker = "extra == 'dev'", specifier = ">=7.8.2" },
     { name = "email-reply-parser", specifier = "==0.5.12" },
     { name = "flake8", marker = "extra == 'dev'", specifier = ">=7.2.0" },
-    { name = "furo", marker = "extra == 'dev'", specifier = ">=2024.0.0" },
+    { name = "furo", marker = "extra == 'docs'", specifier = ">=2024.0.0" },
     { name = "gitchangelog", marker = "extra == 'dev'", specifier = ">=3.0.4" },
     { name = "isort", marker = "extra == 'dev'", specifier = ">=6.0.1" },
     { name = "mkdocs", marker = "extra == 'dev'", specifier = ">=1.6.1" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.16.0" },
-    { name = "myst-parser", marker = "extra == 'dev'", specifier = ">=2.0" },
+    { name = "myst-parser", marker = "extra == 'docs'", specifier = ">=2.0" },
     { name = "pyinstaller", marker = "extra == 'dev'", specifier = ">=5.8" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.4.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=6.1.1" },
     { name = "pytest-mock", marker = "extra == 'dev'", specifier = ">=3.14.1" },
     { name = "python-dotenv", specifier = "==0.14.0" },
     { name = "soupsieve", specifier = "==2.0.1" },
-    { name = "sphinx", marker = "extra == 'dev'", specifier = ">=7.0" },
+    { name = "sphinx", marker = "extra == 'docs'", specifier = ">=7.0" },
     { name = "unicodecsv", specifier = "==0.14.1" },
 ]
-provides-extras = ["dev"]
+provides-extras = ["dev", "docs"]
 
 [[package]]
 name = "mccabe"
