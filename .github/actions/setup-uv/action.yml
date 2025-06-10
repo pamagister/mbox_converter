@@ -1,0 +1,39 @@
+name: Setup Environment
+
+description: Setup uv environment
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+      with:
+        version: "latest"
+
+    # Linux / macOS
+    - if: runner.os != 'Windows'
+      run: |
+        echo "Create virtual environment"
+        uv venv .venv --python ${{ matrix.python-version }}
+        
+        echo "Activate virtual environment"
+        echo "VIRTUAL_ENV=.venv" >> $GITHUB_ENV
+        
+        echo "Install dependencies"
+        uv pip install -e .
+        uv pip install -e ".[dev]"
+      shell: bash
+
+    # Windows
+    - if: runner.os == 'Windows'
+      run: |
+        echo "Create virtual environment"
+        uv venv .venv --python ${{ matrix.python-version }}
+        
+        echo "Activate virtual environment"
+        echo "VIRTUAL_ENV=.venv" >> $GITHUB_ENV
+        
+        echo "Install dependencies"
+        uv pip install -e .
+        uv pip install -e ".[dev]"
+      shell: powershell
