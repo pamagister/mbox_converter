@@ -1,0 +1,79 @@
+version = 1
+revision = 2
+requires-python = ">=3.9, <3.12"
+
+[[package]]
+name = "beautifulsoup4"
+version = "4.13.4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "soupsieve" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d8/e4/0c4c39e18fd76d6a628d4dd8da40543d136ce2d1752bd6eeeab0791f4d6b/beautifulsoup4-4.13.4.tar.gz", hash = "sha256:dbb3c4e1ceae6aefebdaf2423247260cd062430a410e38c66f2baa50a8437195", size = 621067, upload-time = "2025-04-15T17:05:13.836Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/50/cd/30110dc0ffcf3b131156077b90e9f60ed75711223f306da4db08eff8403b/beautifulsoup4-4.13.4-py3-none-any.whl", hash = "sha256:9bbbb14bfde9d79f38b8cd5f8c7c85f4b8f2523190ebed90e950a8dea4cb1c4b", size = 187285, upload-time = "2025-04-15T17:05:12.221Z" },
+]
+
+[[package]]
+name = "email-reply-parser"
+version = "0.5.12"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/ed/f9/3fbd22530467a831a0506267477c5005d24661d07abf776678ab42d51b35/email_reply_parser-0.5.12.tar.gz", hash = "sha256:9dbf3eca69990932234f09e7f50aa73756574fc1f88e88c324fec1a741ee6a74", size = 4694, upload-time = "2020-10-07T17:26:34.734Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ab/8d/11696d31eafc68ceea8108f635d30aefc6df9cb27640949f45aec963d637/email_reply_parser-0.5.12-py3-none-any.whl", hash = "sha256:3499c02284679e020acf8aa30ef9e43c62f9ab5ccee0a35bfac85a0c1fa685fd", size = 4139, upload-time = "2020-10-07T17:26:46.835Z" },
+]
+
+[[package]]
+name = "mbox-converter"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "beautifulsoup4" },
+    { name = "email-reply-parser" },
+    { name = "python-dotenv" },
+    { name = "soupsieve" },
+    { name = "unicodecsv" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "beautifulsoup4", specifier = "==4.13.4" },
+    { name = "email-reply-parser", specifier = "==0.5.12" },
+    { name = "python-dotenv", specifier = "==0.14.0" },
+    { name = "soupsieve", specifier = "==2.0.1" },
+    { name = "unicodecsv", specifier = "==0.14.1" },
+]
+
+[[package]]
+name = "python-dotenv"
+version = "0.14.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/33/3d/a0c00002bae69321f5b87ea7ed123ddf1933e09d3ff658d277889698ee59/python-dotenv-0.14.0.tar.gz", hash = "sha256:8c10c99a1b25d9a68058a1ad6f90381a62ba68230ca93966882a4dbc3bc9c33d", size = 29029, upload-time = "2020-07-03T14:34:05.642Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f2/16/28d434b28c5be29a6af8fd0e3a2bda3bd30500ef0cd17bc79f7a6793a8d4/python_dotenv-0.14.0-py2.py3-none-any.whl", hash = "sha256:c10863aee750ad720f4f43436565e4c1698798d763b63234fb5021b6c616e423", size = 17837, upload-time = "2020-07-03T14:34:04.436Z" },
+]
+
+[[package]]
+name = "soupsieve"
+version = "2.0.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/3e/db/5ba900920642414333bdc3cb397075381d63eafc7e75c2373bbc560a9fa1/soupsieve-2.0.1.tar.gz", hash = "sha256:a59dc181727e95d25f781f0eb4fd1825ff45590ec8ff49eadfd7f1a537cc0232", size = 95986, upload-time = "2020-05-16T23:03:06.281Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6f/8f/457f4a5390eeae1cc3aeab89deb7724c965be841ffca6cfca9197482e470/soupsieve-2.0.1-py3-none-any.whl", hash = "sha256:1634eea42ab371d3d346309b93df7870a88610f0725d47528be902a0d95ecc55", size = 32679, upload-time = "2020-05-16T23:03:01.631Z" },
+]
+
+[[package]]
+name = "typing-extensions"
+version = "4.14.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d1/bc/51647cd02527e87d05cb083ccc402f93e441606ff1f01739a62c8ad09ba5/typing_extensions-4.14.0.tar.gz", hash = "sha256:8676b788e32f02ab42d9e7c61324048ae4c6d844a399eebace3d4979d75ceef4", size = 107423, upload-time = "2025-06-02T14:52:11.399Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/69/e0/552843e0d356fbb5256d21449fa957fa4eff3bbc135a74a691ee70c7c5da/typing_extensions-4.14.0-py3-none-any.whl", hash = "sha256:a1514509136dd0b477638fc68d6a91497af5076466ad0fa6c338e44e359944af", size = 43839, upload-time = "2025-06-02T14:52:10.026Z" },
+]
+
+[[package]]
+name = "unicodecsv"
+version = "0.14.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/6f/a4/691ab63b17505a26096608cc309960b5a6bdf39e4ba1a793d5f9b1a53270/unicodecsv-0.14.1.tar.gz", hash = "sha256:018c08037d48649a0412063ff4eda26eaa81eff1546dbffa51fa5293276ff7fc", size = 10267, upload-time = "2015-09-22T22:00:19.516Z" }

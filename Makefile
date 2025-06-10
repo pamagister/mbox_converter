@@ -11,34 +11,34 @@ help:             ## Show the help.
 .PHONY: show
 show:             ## Show the current environment.
 	@echo "Current environment:"
-	poetry env info
+	uv env info
 
 .PHONY: install
 install:          ## Install the project in dev mode.
-	poetry install && exit; fi
+	uv install && exit; fi
 
 .PHONY: fmt
 fmt:              ## Format code using black & isort.
-	poetry run isort mbox_converter/
-	poetry run black -l 100 mbox_converter/
-	poetry run black -l 100 tests/
+	uv run isort mbox_converter/
+	uv run black -l 100 mbox_converter/
+	uv run black -l 100 tests/
 
 .PHONY: lint
 lint:             ## Run pep8, black, mypy linters.
-	poetry run flake8 mbox_converter/
-	poetry run black -l 100 --check mbox_converter/
-	poetry run black -l 100 --check tests/
-	poetry run mypy --ignore-missing-imports mbox_converter/
+	uv run flake8 mbox_converter/
+	uv run black -l 100 --check mbox_converter/
+	uv run black -l 100 --check tests/
+	uv run mypy --ignore-missing-imports mbox_converter/
 
 .PHONY: test
 test: lint        ## Run tests and generate coverage report.
-	poetry run pytest -v --cov-config .coveragerc --cov=mbox_converter -l --tb=short --maxfail=1 tests/
-	poetry run coverage xml
-	poetry run coverage html
+	uv run pytest -v --cov-config .coveragerc --cov=mbox_converter -l --tb=short --maxfail=1 tests/
+	uv run coverage xml
+	uv run coverage html
 
 .PHONY: watch
 watch:            ## Run tests on every change.
-	ls **/**.py | entr poetry run pytest -s -vvv -l --tb=long --maxfail=1 tests/
+	ls **/**.py | entr uv run pytest -s -vvv -l --tb=long --maxfail=1 tests/
 
 .PHONY: clean
 clean:            ## Clean unused files.
@@ -58,14 +58,14 @@ clean:            ## Clean unused files.
 
 .PHONY: virtualenv
 virtualenv:       ## Create a virtual environment.
-	poetry install
+	uv install
 
 .PHONY: release
 release:          ## Create a new tag for release.
 	@echo "WARNING: This operation will create s version tag and push to github"
 	@read -p "Version? (provide the next x.y.z semver) : " TAG
 	@echo "$${TAG}" > mbox_converter/VERSION
-	@poetry run gitchangelog > HISTORY.md
+	@uv run gitchangelog > HISTORY.md
 	@git add mbox_converter/VERSION HISTORY.md
 	@git commit -m "release: version $${TAG} 🚀"
 	@echo "creating git tag : $${TAG}"
@@ -76,26 +76,8 @@ release:          ## Create a new tag for release.
 .PHONY: docs
 docs:             ## Build the documentation.
 	@echo "building documentation ..."
-	@poetry run mkdocs build
+	@uv run mkdocs build
 	URL="site/index.html"; xdg-open $$URL || sensible-browser $$URL || x-www-browser $$URL || gnome-open $$URL || open $$URL
-
-.PHONY: switch-to-poetry
-switch-to-poetry: ## Switch to poetry package manager.
-	@echo "Switching to poetry ..."
-	@if ! poetry --version > /dev/null; then echo 'poetry is required, install from https://python-poetry.org/'; exit 1; fi
-	@rm -rf .venv
-	@poetry init --no-interaction --name=a_flask_test --author=rochacbruno
-	@echo "" >> pyproject.toml
-	@echo "[tool.poetry.scripts]" >> pyproject.toml
-	@echo "mbox_converter = 'mbox_converter.__main__:main'" >> pyproject.toml
-	@cat requirements.txt | while read in; do poetry add --no-interaction "$${in}"; done
-	@cat requirements-test.txt | while read in; do poetry add --no-interaction "$${in}" --dev; done
-	@poetry install --no-interaction
-	@mkdir -p .github/backup
-	@mv requirements* .github/backup
-	@mv setup.py .github/backup
-	@echo "You have switched to https://python-poetry.org/ package manager."
-	@echo "Please run 'poetry shell' or 'poetry run mbox_converter'"
 
 .PHONY: init
 init:             ## Initialize the project based on an application template.
