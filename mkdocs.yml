@@ -1,3 +1,9 @@
 site_name: MBOX Converter
 theme:
   name: readthedocs
+
+nav:
+  - Home: README.md
+  - Installation: docs/install.md
+  - CLI Usage: docs/cli.md
+  - Contributing: docs/contributing.md

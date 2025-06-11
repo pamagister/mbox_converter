@@ -30,7 +30,6 @@ dev = [
     "pyinstaller>=5.8",
 ]
 docs = [
-    "myst-parser>=2.0",
     "mkdocs>=1.6.1",
 ]
 
