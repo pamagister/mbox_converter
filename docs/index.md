@@ -33,13 +33,3 @@ or run it directly with:
 ```bash
 poetry run mbox-converter input.mbox --output-format csv
 ```
-
-```{include} ../../README.md
-
-```{toctree}
-:maxdepth: 2
-:caption: Contents
-
-install
-cli
-contributing
