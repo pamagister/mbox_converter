@@ -314,8 +314,6 @@ dependencies = [
     { name = "beautifulsoup4" },
     { name = "email-reply-parser" },
     { name = "python-dotenv" },
-    { name = "soupsieve" },
-    { name = "unicodecsv" },
 ]
 
 [package.optional-dependencies]
@@ -351,8 +349,6 @@ requires-dist = [
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=6.1.1" },
     { name = "pytest-mock", marker = "extra == 'dev'", specifier = ">=3.14.1" },
     { name = "python-dotenv", specifier = "==0.14.0" },
-    { name = "soupsieve", specifier = "==2.0.1" },
-    { name = "unicodecsv", specifier = "==0.14.1" },
 ]
 provides-extras = ["dev", "docs"]
 
@@ -746,12 +742,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/d1/bc/51647cd02527e87d0
 wheels = [
     { url = "https://files.pythonhosted.org/packages/69/e0/552843e0d356fbb5256d21449fa957fa4eff3bbc135a74a691ee70c7c5da/typing_extensions-4.14.0-py3-none-any.whl", hash = "sha256:a1514509136dd0b477638fc68d6a91497af5076466ad0fa6c338e44e359944af", size = 43839, upload-time = "2025-06-02T14:52:10.026Z" },
 ]
-
-[[package]]
-name = "unicodecsv"
-version = "0.14.1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/6f/a4/691ab63b17505a26096608cc309960b5a6bdf39e4ba1a793d5f9b1a53270/unicodecsv-0.14.1.tar.gz", hash = "sha256:018c08037d48649a0412063ff4eda26eaa81eff1546dbffa51fa5293276ff7fc", size = 10267, upload-time = "2015-09-22T22:00:19.516Z" }
 
 [[package]]
 name = "watchdog"

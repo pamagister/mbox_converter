@@ -20,7 +20,15 @@ install:          ## Install the project in dev mode.
 
 .PHONY: lock
 lock:           ## builds the uv.lock file and syncs the packages
-	uv lock --all
+	uv lock
+
+.PHONY: precommit
+precommit: ## Format, test and check dependencies.
+	$(MAKE) lock
+	$(MAKE) install
+	$(MAKE) fmt
+	$(MAKE) test
+	$(MAKE) deptry
 
 .PHONY: fmt
 fmt:              ## Format code using black & isort.
@@ -60,8 +68,11 @@ clean:            ## Clean unused files.
 	@rm -rf htmlcov
 	@rm -rf .tox/
 	@rm -rf docs/_build
+
+.PHONY: deptry
+deptry:            ## Check for unused dependencies.
 	uv pip install deptry
-	uv run deptry dependencies
+	uv run deptry .
 
 .PHONY: virtualenv
 virtualenv:       ## Create a virtual environment.

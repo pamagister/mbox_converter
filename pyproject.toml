@@ -10,8 +10,6 @@ requires-python = ">=3.9,<3.12"
 dependencies = [
     "beautifulsoup4 ==4.13.4",
     "email-reply-parser ==0.5.12",
-    "soupsieve ==2.0.1",
-    "unicodecsv ==0.14.1",
     "python-dotenv ==0.14.0"
 ]
 
@@ -29,6 +27,7 @@ dev = [
     "gitchangelog>=3.0.4",
     "pyinstaller>=5.8",
 ]
+
 docs = [
     "mkdocs>=1.6.1",
 ]
@@ -40,4 +39,7 @@ build-backend = "hatchling.build"
 [tool.poetry.scripts]
 mbox_converter = "mbox_converter.cli:main"
 mbox_gui = "mbox_converter.gui:run_gui"
+
+[tool.deptry]
+pep621_dev_dependency_groups = ["dev", "docs"]
 

@@ -89,6 +89,7 @@ lint:             ## Run pep8, black, mypy linters.
 test: lint        ## Run tests and generate coverage report.
 watch:            ## Run tests on every change.
 clean:            ## Clean unused files. 
+deptry:           ## Check for unused dependencies.
 virtualenv:       ## Create a virtual environment.
 release:          ## Create a new tag for release.
 docs:             ## Build the documentation using mkdocs.
