@@ -1,9 +1,18 @@
 site_name: MBOX Converter
+site_url: !ENV READTHEDOCS_CANONICAL_URL
+repo_url: https://github.com/pamagister/mbox_converter
+repo_name: GitHub
+edit_uri: edit/main/docs/
+
 theme:
   name: readthedocs
+  features:
+    - navigation.instant
 
 markdown_extensions:
   - toc:
       permalink: "#"
   - tables
   - admonition
+
+
