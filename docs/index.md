@@ -1,3 +1,10 @@
+[![Github CI Status](https://github.com/pamagister/mbox_converter/actions/workflows/main.yml/badge.svg)](https://github.com/pamagister/mbox_converter/actions)
+[![GitHub release](https://img.shields.io/github/v/release/pamagister/mbox_converter)](https://github.com/pamagister/mbox_converter/releases)
+[![License](https://img.shields.io/github/license/pamagister/mbox_converter)](https://github.com/pamagister/mbox_converter/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/pamagister/mbox_converter)](https://github.com/pamagister/mbox_converter/issues)
+[![PyPI](https://img.shields.io/pypi/v/mbox_converter)](https://pypi.org/project/mbox_converter/)
+
+
 # Welcome to MBOX Converter
 
 **Mbox Converter** is a lightweight, Python-based command-line and GUI tool 
