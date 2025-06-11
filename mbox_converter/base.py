@@ -4,7 +4,7 @@ import os
 import quopri
 import re
 from email.header import decode_header
-from email.utils import parsedate_tz, mktime_tz
+from email.utils import mktime_tz, parsedate_tz
 from math import inf
 
 from bs4 import BeautifulSoup

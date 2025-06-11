@@ -11,11 +11,16 @@ help:             ## Show the help.
 .PHONY: show
 show:             ## Show the current environment.
 	@echo "Current environment:"
-	uv env info
+	uv venv info
 
 .PHONY: install
 install:          ## Install the project in dev mode.
-	uv install && exit; fi
+	uv venv
+	uv pip install -e .[dev,docs]
+
+.PHONY: lock
+lock:           ## builds the uv.lock file and syncs the packages
+	uv lock --all
 
 .PHONY: fmt
 fmt:              ## Format code using black & isort.
@@ -77,7 +82,7 @@ release:          ## Create a new tag for release.
 docs:             ## Build the documentation.
 	@echo "building documentation ..."
 	@uv run mkdocs build
-	URL="site/index.html"; xdg-open $$URL || sensible-browser $$URL || x-www-browser $$URL || gnome-open $$URL || open $$URL
+	@uv run mkdocs serve
 
 .PHONY: init
 init:             ## Initialize the project based on an application template.
