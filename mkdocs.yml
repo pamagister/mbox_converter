@@ -1,9 +1,3 @@
 site_name: MBOX Converter
-repo_url: https://github.com/pamagister/mbox_converter
-
-nav:
-    - Home: index.md
-    - Installation: docs/install.md
-    - Command line interface: docs/cli.md
-    - Contributing: docs/contributing.md
-theme: readthedocs
+theme:
+  name: readthedocs
