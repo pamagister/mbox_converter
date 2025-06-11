@@ -12,9 +12,8 @@ python:
       extra_requirements:
         - docs
 
-sphinx:
-  configuration: docs/source/conf.py
+mkdocs:
+  configuration: mkdocs.yml
 
 formats:
-  - htmlzip
   - pdf

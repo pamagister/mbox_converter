@@ -455,7 +455,6 @@ dev = [
     { name = "flake8" },
     { name = "gitchangelog" },
     { name = "isort" },
-    { name = "mkdocs" },
     { name = "mypy" },
     { name = "pyinstaller" },
     { name = "pytest" },
@@ -463,6 +462,7 @@ dev = [
     { name = "pytest-mock" },
 ]
 docs = [
+    { name = "mkdocs" },
     { name = "myst-parser", version = "3.0.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "myst-parser", version = "4.0.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
     { name = "sphinx", version = "7.4.7", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
@@ -480,7 +480,7 @@ requires-dist = [
     { name = "flake8", marker = "extra == 'dev'", specifier = ">=7.2.0" },
     { name = "gitchangelog", marker = "extra == 'dev'", specifier = ">=3.0.4" },
     { name = "isort", marker = "extra == 'dev'", specifier = ">=6.0.1" },
-    { name = "mkdocs", marker = "extra == 'dev'", specifier = ">=1.6.1" },
+    { name = "mkdocs", marker = "extra == 'docs'", specifier = ">=1.6.1" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.16.0" },
     { name = "myst-parser", marker = "extra == 'docs'", specifier = ">=2.0" },
     { name = "pyinstaller", marker = "extra == 'dev'", specifier = ">=5.8" },
