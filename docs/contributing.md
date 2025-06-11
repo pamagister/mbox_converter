@@ -111,12 +111,9 @@ To trigger a new release all you need to do is.
     * Make your changes following the steps described above.
     * Commit your changes following the [conventional git commit messages](https://www.conventionalcommits.org/en/v1.0.0/).
 2. Run the tests to ensure everything is working.
-3. Set your git user name and email:
-
-   ```
-   git config --global user.name "Your name"
-   git config --global user.email "your.mail@example.com"
-   ```
+3. Set your git username and email:
+   * `git config --global user.name "Your name"`
+   * `git config --global user.email "your.mail@example.com"`
 
 4. Run `make release` to create a new tag and push it to the remote repo.
 
