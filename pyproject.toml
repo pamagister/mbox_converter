@@ -39,5 +39,5 @@ build-backend = "hatchling.build"
 
 [tool.poetry.scripts]
 mbox_converter = "mbox_converter.cli:main"
-
+mbox_gui = "mbox_converter.gui:run_gui"
 

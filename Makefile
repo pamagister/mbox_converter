@@ -60,6 +60,8 @@ clean:            ## Clean unused files.
 	@rm -rf htmlcov
 	@rm -rf .tox/
 	@rm -rf docs/_build
+	uv pip install deptry
+	uv run deptry dependencies
 
 .PHONY: virtualenv
 virtualenv:       ## Create a virtual environment.

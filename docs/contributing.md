@@ -2,9 +2,12 @@
 
 mbox_converter welcomes contributions from the community.
 
-**You need PYTHON3!**
+These instructions are basically for linux base systems. (Linux, MacOS, BSD, etc.)
 
-This instructions are for linux base systems. (Linux, MacOS, BSD, etc.)
+For setup instructions how to get `make` commands running on Windows, 
+see [How to use make on Windows](contributing/make_windows.md).
+
+
 ## Setting up your own fork of this repo.
 
 - On github interface click on `Fork` button.
@@ -31,7 +34,7 @@ Run `git checkout -b my_contribution`
 
 ## Make your changes
 
-Edit the files using your preferred editor. (we recommend VIM or VSCode)
+Edit the files using your preferred editor. (we recommend PyCharm)
 
 ## Format the code
 
@@ -77,17 +80,18 @@ This project comes with a `Makefile` that contains a number of useful utility.
 Usage: make <target>
 
 Targets:
-help:             ## Show the help.
+help:             ## Displays the help.
+show:             ## Show the current environment.
 install:          ## Install the project in dev mode.
+lock:             ## Builds the uv.lock file and syncs the packages.
 fmt:              ## Format code using black & isort.
 lint:             ## Run pep8, black, mypy linters.
 test: lint        ## Run tests and generate coverage report.
 watch:            ## Run tests on every change.
-clean:            ## Clean unused files.
+clean:            ## Clean unused files. 
 virtualenv:       ## Create a virtual environment.
 release:          ## Create a new tag for release.
-docs:             ## Build the documentation.
-switch-to-poetry: ## Switch to poetry package manager.
+docs:             ## Build the documentation using mkdocs.
 init:             ## Initialize the project based on an application template.
 ```
 
