@@ -21,19 +21,71 @@ making it ideal for email analysis, data extraction, and archival purposes.
 * Convert `.mbox` files to structured formats like `.csv` or plain text
 * Filter emails by date, sender, subject, and more
 * Fast, cross-platform, and fully open-source
-* Easy to install via [Poetry](https://python-poetry.org/) or `pip`
+* Easy to install via [uv](https://docs.astral.sh/uv/) or `pip`
 * Well-tested with continuous integration across Linux, macOS, and Windows
 
-## Getting Started
+## Installation
 
-To get started, install the tool using:
+
+### 🐍 Install from PyPI 
 
 ```bash
-poetry install
+python -m pip install mbox_converter
 ```
 
-or run it directly with:
+
+### 🔽 Download installer
+
+- [⬇️ Download for Windows](https://github.com/pamagister/mbox_converter/releases/latest/download/MboxConverter-win.zip)
+- [⬇️ Download for macOS](https://github.com/pamagister/mbox_converter/releases/latest/download/MboxConverter-macOS.zip)
+
+
+### Run from source
 
 ```bash
-poetry run mbox-converter input.mbox --output-format csv
+python -m mbox_converter --format csv example.mbox
+```
+
+### Run GUI from source
+
+```bash
+python -m mbox_converter.gui
+```
+
+
+### Run command line from source
+
+Creating virtual environment using [uv](https://docs.astral.sh/uv/):
+```bash
+uv venv
+```
+
+Activating a Python virtual environment (`venv`)
+> Note: Replace `.venv` with your Venv folder name if you have chosen a different one.
+
+🔹 Windows (PowerShell)
+
+```powershell
+.venv\Scripts\activate.ps1
+```
+
+🔹 Windows (CMD)
+```cmd
+.venv\Scripts\activate.bat
+```
+
+🔹 Linux / macOS (Bash/Zsh)
+```bash
+source .venv/bin/activate
+```
+
+Run mbox_converter from command line:
+```bash
+mbox_converter --format csv example.mbox
+```
+
+### Run GUI
+
+```bash
+mbox_gui
 ```
