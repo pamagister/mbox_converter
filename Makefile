@@ -1,4 +1,6 @@
 .ONESHELL:
+SHELL := /bin/bash
+PYTHONIOENCODING := utf-8
 
 .PHONY: help
 help:             ## Show the help.
