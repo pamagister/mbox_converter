@@ -27,6 +27,8 @@ or run it directly with:
 poetry run mbox-converter input.mbox --output-format csv
 ```
 
+```{include} ../../README.md
+
 ```{toctree}
 :maxdepth: 2
 :caption: Contents

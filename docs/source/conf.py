@@ -14,6 +14,7 @@ project = "mbox_converter"
 author = "pamagister"
 release = "0.1.0"
 
+
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
@@ -22,7 +23,7 @@ extensions = [
     "sphinx.ext.napoleon",
     "myst_parser",
 ]
-
+myst_enable_extensions = ["include"]
 templates_path = ["_templates"]
 exclude_patterns = []
 
