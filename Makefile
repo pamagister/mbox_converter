@@ -80,8 +80,13 @@ virtualenv:       ## Create a virtual environment.
 
 .PHONY: release
 release:          ## Create a new tag for release.
-	@echo "WARNING: This operation will create s version tag and push to github"
-	@read -p "Version? (provide the next x.y.z semver) : " TAG
+	@echo "WARNING: This operation will create a version tag and push to GitHub"
+
+	@CURRENT_VERSION=$$(cat mbox_converter/VERSION)
+	IFS=. read -r MAJOR MINOR PATCH <<< "$$CURRENT_VERSION"
+	@NEXT_VERSION="$$MAJOR.$$MINOR.$$((PATCH + 1))"
+	@echo "Current version: $$CURRENT_VERSION"
+	@read -e -i "$$NEXT_VERSION" -p "Version? (provide the next x.y.z semver) : " TAG
 	@echo "$${TAG}" > mbox_converter/VERSION
 	@uv run gitchangelog > HISTORY.md
 	@git add mbox_converter/VERSION HISTORY.md
@@ -89,7 +94,7 @@ release:          ## Create a new tag for release.
 	@echo "creating git tag : $${TAG}"
 	@git tag $${TAG}
 	@git push -u origin HEAD --tags
-	@echo "Github Actions will detect the new tag and release the new version."
+	@echo "GitHub Actions will detect the new tag and release the new version."
 
 .PHONY: docs
 docs:             ## Build and sync the documentation.
