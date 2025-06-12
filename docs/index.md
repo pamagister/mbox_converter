@@ -8,29 +8,6 @@
 [![PyPI](https://img.shields.io/pypi/v/mbox_converter)](https://pypi.org/project/mbox_converter/)
 
 
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: Getting Started
-
-   /Getting Started
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: Usage
-
-   /usage
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: How to contribute
-
-   /contributing
-
-
-
 **Mbox Converter** is a lightweight, Python-based command-line and GUI tool 
 for converting and processing `.mbox` email archive files. 
 It supports a variety of output formats and filtering options, 
@@ -43,3 +20,27 @@ making it ideal for email analysis, data extraction, and archival purposes.
 * Fast, cross-platform, and fully open-source
 * Easy to install via [uv](https://docs.astral.sh/uv/) or `pip`
 * Well-tested with continuous integration across Linux, macOS, and Windows
+
+:::{toctree}
+:caption: Getting Started
+:maxdepth: 2
+:hidden:
+
+/Getting Started
+:::
+
+:::{toctree}
+:caption: Usage
+:maxdepth: 2
+:hidden:
+
+/usage
+:::
+
+:::{toctree}
+:caption: How to contribute
+:maxdepth: 2
+:hidden:
+
+/contributing
+:::
