@@ -33,25 +33,25 @@ This method allows you to use `make` directly in PowerShell or Command Prompt.
 
 2. Install Chocolatey by running:
 
-   ```powershell
-   Set-ExecutionPolicy Bypass -Scope Process -Force
-   [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
-   iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-````
+    ```powershell
+    Set-ExecutionPolicy Bypass -Scope Process -Force
+    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
+    iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+    ```
 
 3. Close and reopen PowerShell **(or restart your system)**.
 
 4. Now install `make`:
 
-   ```powershell
-   choco install make
-   ```
+    ```powershell
+    choco install make
+    ```
 
 5. Verify it works:
 
-   ```powershell
-   make --version
-   ```
+    ```powershell
+    make --version
+    ```
 
 ---
 
@@ -62,7 +62,8 @@ MSYS2 provides a full Unix toolchain for Windows, including `make`.
 ### 📦 Step-by-Step: Installing `make` using MSYS2
 
 1. Download MSYS2 from:
-   👉 [https://www.msys2.org](https://www.msys2.org)
+
+    👉 [https://www.msys2.org](https://www.msys2.org)
 
 2. Install MSYS2 (default path: `C:\msys64`).
 
@@ -70,23 +71,23 @@ MSYS2 provides a full Unix toolchain for Windows, including `make`.
 
 4. Update the package manager:
 
-   ```bash
-   pacman -Syu
-   ```
+    ```bash
+    pacman -Syu
+    ```
 
    > 📝 If prompted, close the terminal and re-open it after updating.
 
 5. Install `make`:
 
-   ```bash
-   pacman -S make
-   ```
+    ```bash
+    pacman -S make
+    ```
 
 6. Verify installation:
 
-   ```bash
-   make --version
-   ```
+    ```bash
+    make --version
+    ```
 
 ---
 
@@ -96,9 +97,9 @@ To use `make` in Git Bash (or any terminal), you must add it to your system's PA
 
 1. Find the path to `make`, usually:
 
-   ```
-   C:\msys64\usr\bin
-   ```
+    ```
+    C:\msys64\usr\bin
+    ```
 
 2. Open **System Properties → Environment Variables**.
 
@@ -106,9 +107,9 @@ To use `make` in Git Bash (or any terminal), you must add it to your system's PA
 
 4. Add the path:
 
-   ```
-   C:\msys64\usr\bin
-   ```
+    ```
+    C:\msys64\usr\bin
+    ```
 
 5. Click **OK** and restart Git Bash or your system.
 
