@@ -20,27 +20,3 @@ making it ideal for email analysis, data extraction, and archival purposes.
 * Fast, cross-platform, and fully open-source
 * Easy to install via [uv](https://docs.astral.sh/uv/) or `pip`
 * Well-tested with continuous integration across Linux, macOS, and Windows
-
-:::{toctree}
-:caption: Getting Started
-:maxdepth: 2
-:hidden:
-
-/Getting Started
-:::
-
-:::{toctree}
-:caption: Usage
-:maxdepth: 2
-:hidden:
-
-/usage
-:::
-
-:::{toctree}
-:caption: How to contribute
-:maxdepth: 2
-:hidden:
-
-/contributing
-:::
