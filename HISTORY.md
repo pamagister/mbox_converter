@@ -4,6 +4,18 @@ Changelog
 
 (unreleased)
 ------------
+- Auto-sync the docs on make docs. [Paul]
+- Update docs. [Paul]
+- Add pre-commit. [Paul]
+- Update README.md from docs/index.md. [github-actions]
+- Test doc structure. [Paul]
+- Test doc structure. [Paul]
+- History and version. [Paul]
+- Improve make doc. [Paul]
+
+
+0.1.16 (2025-06-11)
+-------------------
 
 Fix
 ~~~
