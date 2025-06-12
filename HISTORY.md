@@ -4,6 +4,18 @@ Changelog
 
 (unreleased)
 ------------
+
+Fix
+~~~
+- Indent in doc. [Paul]
+
+Other
+~~~~~
+- Only sync readme in main branch. [Paul]
+
+
+0.1.15 (2025-06-11)
+-------------------
 - Doc git name. [Paul]
 - Fix some release issues. [Paul]
 
