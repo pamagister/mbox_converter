@@ -5,7 +5,7 @@ mbox_converter welcomes contributions from the community.
 These instructions are basically for linux base systems. (Linux, MacOS, BSD, etc.)
 
 For setup instructions how to get `make` commands running on Windows, 
-see [How to use make on Windows](contributing/make_windows.md).
+see [How to use make on Windows](make_windows.md).
 
 
 ## Setting up your own fork of this repo.

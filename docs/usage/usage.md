@@ -56,7 +56,7 @@ You can also run the Converter conveniently by dragging and dropping `.mbox` fil
 
 ### 🪟 Windows (`.bat` file)
 
-#### File: `DnD_mbox_converter.bat`
+#### File: `run_drag_and_drop.bat`
 
 **Steps:**
 
@@ -74,11 +74,11 @@ You can also run the Converter conveniently by dragging and dropping `.mbox` fil
 
 ### 🐧 Linux/macOS (`.sh` file)
 
-#### File: `setup_and_run.sh`
+#### File: `run_drag_and_drop.sh`
 
 **Steps:**
 
-1. Place `setup_and_run.sh`, `mbox_converter.py`, and `requirements.txt` in the same directory.
+1. Place `run_drag_and_drop.sh`, `mbox_converter.py`, and `requirements.txt` in the same directory.
 
 2. Make the script executable:
 
