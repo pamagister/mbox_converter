@@ -26,8 +26,6 @@ lock:           ## builds the uv.lock file and syncs the packages
 
 .PHONY: precommit
 precommit: ## Format, test and check dependencies.
-	$(MAKE) lock
-	$(MAKE) install
 	$(MAKE) fmt
 	$(MAKE) test
 	$(MAKE) deptry
