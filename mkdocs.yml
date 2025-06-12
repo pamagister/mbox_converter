@@ -14,9 +14,3 @@ markdown_extensions:
   - tables
   - admonition
 
-
-nav:
-  - Home: index.md
-  - Getting Started: getting-started/
-  - Usage: usage/
-  - Contributing: contributing/
