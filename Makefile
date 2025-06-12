@@ -17,7 +17,7 @@ show:             ## Show the current environment.
 
 .PHONY: install
 install:          ## Install the project in dev mode.
-	uv venv
+	$(MAKE) virtualenv
 	uv pip install -e .[dev,docs]
 
 .PHONY: lock
@@ -92,7 +92,9 @@ release:          ## Create a new tag for release.
 	@echo "Github Actions will detect the new tag and release the new version."
 
 .PHONY: docs
-docs:             ## Build the documentation.
+docs:             ## Build and sync the documentation.
+	@echo "sync documentation ..."
+	@uv run ./scripts/update_readme.py
 	@echo "building documentation ..."
 	@uv run mkdocs build
 	@uv run mkdocs serve

@@ -8,4 +8,4 @@ dst = Path("README.md")
 prefix = "<!-- This README.md is auto-generated from docs/index.md -->\n\n"
 
 dst.write_text(prefix + src.read_text(), encoding="utf-8")
-print("README.md updated from docs/index.md")
+print(f"DONE    -  {dst} updated from {src}")
