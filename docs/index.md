@@ -8,6 +8,28 @@
 [![PyPI](https://img.shields.io/pypi/v/mbox_converter)](https://pypi.org/project/mbox_converter/)
 
 
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: Getting Started
+
+   /Getting Started
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: Usage
+
+   /usage
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: How to contribute
+
+   /contributing
+
+
 
 **Mbox Converter** is a lightweight, Python-based command-line and GUI tool 
 for converting and processing `.mbox` email archive files. 
