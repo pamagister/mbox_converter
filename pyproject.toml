@@ -6,7 +6,7 @@ authors = [
     {name = "pamagister"}
 ]
 readme = "README.md"
-requires-python = ">=3.9,<3.12"
+requires-python = ">=3.10,<3.12"
 dependencies = [
     "beautifulsoup4 ==4.13.4",
     "dotenv>=0.9.9",
@@ -31,6 +31,7 @@ dev = [
 
 docs = [
     "mkdocs>=1.6.1",
+    "mkdocs-awesome-nav>=2.6.1",
 ]
 
 [build-system]
