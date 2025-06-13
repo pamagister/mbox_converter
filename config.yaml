@@ -1,0 +1,36 @@
+# mbox_converter Configuration File
+# This file was auto-generated. Modify as needed.
+
+# Include 'From' field
+# Choices: ON, OFF
+# Type: str
+sent_from: 'ON'
+
+# Include 'To' field
+# Choices: ON, OFF
+# Type: str
+to: 'ON'
+
+# Include 'Date' field
+# Choices: ON, OFF
+# Type: str
+date: 'ON'
+
+# Include 'Subject' field
+# Choices: ON, OFF
+# Type: str
+subject: 'ON'
+
+# Output format: txt or csv
+# Choices: txt, csv
+# Type: str
+format: 'txt'
+
+# Max number of days per output file (-1 for unlimited)
+# Type: int
+max_days: 1
+
+# Path to mbox file
+# Type: str
+mbox_file: ''
+
