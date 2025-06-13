@@ -13,48 +13,41 @@ from mbox_converter.config import MboxConverterConfig
 
 
 def parse_arguments():
-    """Parse command line arguments based on configuration parameters."""
+    """Parse command line arguments with config file support."""
     parser = argparse.ArgumentParser(
         description="Parse mbox file and export to text or CSV.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  %(prog)s mailbox.mbox
+  %(prog)s --config config.yaml mailbox.mbox
+  %(prog)s --format csv --max-days 30 mailbox.mbox
+  %(prog)s --from OFF --subject OFF mailbox.mbox
+        """,
     )
 
-    parser.add_argument(
-        "--sent_from",
-        default="ON",
-        choices=["ON", "OFF"],
-        help="Include 'From' field (default: ON)",
-    )
-    parser.add_argument(
-        "--to", default="ON", choices=["ON", "OFF"], help="Include 'To' field (default: ON)"
-    )
-    parser.add_argument(
-        "--date", default="ON", choices=["ON", "OFF"], help="Include 'Date' field (default: ON)"
-    )
-    parser.add_argument(
-        "--subject",
-        default="ON",
-        choices=["ON", "OFF"],
-        help="Include 'Subject' field (default: ON)",
-    )
-    parser.add_argument(
-        "--format",
-        default="txt",
-        choices=["txt", "csv"],
-        help="Output format: txt or csv (default: txt)",
-    )
-    parser.add_argument(
-        "--max_days",
-        default=-1,
-        type=int,
-        help="Max number of days per output file (-1 for unlimited) (default: -1)",
-    )
-    parser.add_argument(
-        "mbox_file",
-        default="example.mbox",
-        type=str,
-        help="Path to mbox file (default: example.mbox)",
-    )
+    # Config file argument
+    parser.add_argument("--config", help="Path to configuration file (JSON or YAML)")
+
+    # Generate arguments from config parameters
+    for param in MboxConverterConfig.PARAMETERS:
+        if param.name == "mbox_file":
+            # Positional argument
+            parser.add_argument("mbox_file", help=param.help)
+        else:
+            # Optional argument
+            kwargs = {"default": param.default, "help": f"{param.help} (default: {param.default})"}
+
+            if param.name.endswith("_"):
+                kwargs["dest"] = param.name
+
+            if param.choices:
+                kwargs["choices"] = param.choices
+
+            if param.type_ == int:
+                kwargs["type"] = int
+
+            parser.add_argument(param.cli_arg, **kwargs)
 
     return parser.parse_args()
 
@@ -66,7 +59,7 @@ def main():
     # Create config object
     try:
         # Load from config file if provided
-        config = MboxConverterConfig('config.yaml')
+        config = MboxConverterConfig(config_file=args.config if args.config else None)
 
         # Override with CLI arguments (only if they differ from defaults)
         for param in MboxConverterConfig.PARAMETERS:
@@ -76,6 +69,20 @@ def main():
                 # (i.e., differs from the parameter's default)
                 if arg_value != param.default:
                     setattr(config, param.name, arg_value)
+
+        # Create and run MboxConverter
+        converter = MboxConverter(**config.get_kwargs())
+        converter.parse()
+
+        # Validate required parameters
+        if not config.mbox_file:
+            print("Error: mbox_file is required")
+            return 1
+
+        # Check if mbox file exists
+        if not Path(config.mbox_file).exists():
+            print(f"Error: mbox file not found: {config.mbox_file}")
+            return 1
 
         # Create and run MboxConverter
         converter = MboxConverter(**config.get_kwargs())
@@ -92,4 +99,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+
+    sys.exit(main())

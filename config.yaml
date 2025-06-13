@@ -28,7 +28,7 @@ format: 'txt'
 
 # Max number of days per output file (-1 for unlimited)
 # Type: int
-max_days: -1
+max_days: 1000
 
 # Path to mbox file
 # Type: str
