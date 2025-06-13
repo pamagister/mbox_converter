@@ -334,6 +334,7 @@ dev = [
 docs = [
     { name = "mkdocs" },
     { name = "mkdocs-awesome-nav" },
+    { name = "pygments" },
 ]
 
 [package.metadata]
@@ -350,6 +351,7 @@ requires-dist = [
     { name = "mkdocs-awesome-nav", marker = "extra == 'docs'", specifier = ">=2.6.1" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.16.0" },
     { name = "pre-commit", marker = "extra == 'dev'", specifier = ">=4.2.0" },
+    { name = "pygments", marker = "extra == 'docs'", specifier = ">=2.19.1" },
     { name = "pyinstaller", marker = "extra == 'dev'", specifier = ">=5.8" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.4.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=6.1.1" },
