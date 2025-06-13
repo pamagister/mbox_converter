@@ -1,4 +1,4 @@
-# Command line interface
+# Cli legacy
 
 Command line options
 
