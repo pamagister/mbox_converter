@@ -48,7 +48,7 @@ python -m mbox_converter.cli --max_days 7 example.mbox
 ### 4. complete control (subject only, CSV, grouped daily)
 
 ```bash
-python -m mbox_converter.cli --from OFF --to OFF --date OFF --format csv --max_days 1 example.mbox
+python -m mbox_converter.cli --sent_from OFF --to OFF --date OFF --format csv --max_days 1 example.mbox
 ```
 
 ---

@@ -56,19 +56,14 @@ def parse_arguments():
 
 def main():
     """Main entry point for the CLI application."""
-    # parser = argparse.ArgumentParser()
     args = parse_arguments()
-    print(args)
-
-    # explicit_args = parser.parse_args()
 
     # Create config from CLI arguments
-    config = MboxConverterConfig("config.yaml")
+    config = MboxConverterConfig()
     for param in MboxConverterConfig.PARAMETERS:
         if hasattr(args, param.name):
-            print(f"{param.name}: {param.default}, {getattr(args, param.name)}")
+            setattr(config, param.name, getattr(args, param.name))
 
-    print(config.to_dict())
     # Create and run MboxConverter
     converter = MboxConverter(**config.get_kwargs())
     converter.parse()
