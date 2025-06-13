@@ -10,7 +10,7 @@ from mbox_converter.base import (
     extract_emails,
 )
 from mbox_converter.base import NAME
-from mbox_converter.config import MboxConverterConfig
+from mbox_converter.config import ConfigParameterManager
 
 
 # install pytest and pytest-mock and run tests manually from the terminal:
@@ -79,7 +79,7 @@ def mock_email():
 
 
 def test_build_txt_output(mock_email):
-    config = MboxConverterConfig()
+    config = ConfigParameterManager()
     parser = MboxConverter(config)
     output = parser.build_txt_output(mock_email)
     assert "From: alice@example.com" in output
@@ -89,7 +89,7 @@ def test_build_txt_output(mock_email):
 
 
 def test_build_csv_output(mock_email):
-    config = MboxConverterConfig()
+    config = ConfigParameterManager()
     parser = MboxConverter(config)
     date_str = "2023-06-05"
     fields = parser.build_csv_output(mock_email, date_str)
@@ -117,7 +117,7 @@ def test_parse_creates_output(mock_open, mock_mbox, mocker):
     mock_mbox.return_value = [fake_email]
     mock_file = mock_open.return_value.__enter__.return_value
 
-    config = MboxConverterConfig()
+    config = ConfigParameterManager()
     parser = MboxConverter(config)
     parser.parse()
 
@@ -147,7 +147,7 @@ def test_max_days_split(mocker):
 
     mocker.patch("mbox_converter.base.mailbox.mbox", return_value=[(email1), (email2)])
     mock_open = mocker.patch("mbox_converter.base.open", mocker.mock_open())
-    config = MboxConverterConfig()
+    config = ConfigParameterManager()
     config.max_days = 2
     parser = MboxConverter(config)
     parser.parse()

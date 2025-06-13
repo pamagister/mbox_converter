@@ -8,7 +8,8 @@ import argparse
 from pathlib import Path
 
 from mbox_converter.base import MboxConverter
-from mbox_converter.config import MboxConverterConfig
+from mbox_converter.config import ConfigParameterManager
+from mbox_converter.parameters import PARAMETERS
 
 
 def parse_arguments():
@@ -33,7 +34,7 @@ Examples:
     )
 
     # Generate arguments from config parameters
-    for param in MboxConverterConfig.PARAMETERS:
+    for param in PARAMETERS:
         if param.name == "mbox_file":
             # Positional argument
             parser.add_argument("mbox_file", help=param.help)
@@ -65,10 +66,10 @@ def main():
     # Create config object
     try:
         # Load from config file if provided
-        config = MboxConverterConfig(config_file=args.config if args.config else None)
+        config = ConfigParameterManager(config_file=args.config if args.config else None)
 
         # Override with CLI arguments (only if they differ from defaults)
-        for param in MboxConverterConfig.PARAMETERS:
+        for param in PARAMETERS:
             if hasattr(args, param.name):
                 arg_value = getattr(args, param.name)
                 # Only override if the CLI argument was explicitly provided

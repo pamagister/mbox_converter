@@ -1,100 +1,11 @@
-"""Central configuration management for mbox_converter project.
-
-This module provides a single source of truth for all configuration parameters.
-It can generate config files, CLI modules, and documentation from the parameter definitions.
-"""
-
 import json
-from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
+
+from mbox_converter.parameters import PARAMETERS
 
 
-@dataclass
-class ConfigParameter:
-    """Represents a single configuration parameter with all its metadata."""
-
-    name: str
-    default: Any
-    type_: type
-    choices: Optional[List[str]] = None
-    help: str = ""
-    cli_arg: Optional[str] = None
-    required: bool = False
-    is_cli: bool = True
-
-    def __post_init__(self):
-        if self.cli_arg is None:
-            self.cli_arg = f"--{self.name}"
-
-
-class MboxConverterConfig:
-    """Central configuration class for mbox_converter.
-
-    All parameters are defined here as class attributes with their metadata.
-    This serves as the single source of truth for configuration management.
-    """
-
-    # Define all configuration parameters
-    PARAMETERS = [
-        ConfigParameter(
-            name="sent_from",
-            default="ON",
-            type_=str,
-            choices=["ON", "OFF"],
-            help="Include 'From' field",
-        ),
-        ConfigParameter(
-            name="to",
-            default="ON",
-            type_=str,
-            choices=["ON", "OFF"],
-            help="Include 'To' field",
-        ),
-        ConfigParameter(
-            name="date",
-            default="ON",
-            type_=str,
-            choices=["ON", "OFF"],
-            help="Include 'Date' field",
-        ),
-        ConfigParameter(
-            name="subject",
-            default="ON",
-            type_=str,
-            choices=["ON", "OFF"],
-            help="Include 'Subject' field",
-        ),
-        ConfigParameter(
-            name="format",
-            default="txt",
-            type_=str,
-            choices=["txt", "csv"],
-            help="Output format: txt or csv",
-        ),
-        ConfigParameter(
-            name="max_days",
-            default=-1,
-            type_=int,
-            help="Max number of days per output file (-1 for unlimited)",
-        ),
-        ConfigParameter(
-            name="mbox_file",
-            default="",
-            type_=str,
-            help="Path to mbox file",
-            required=True,
-            cli_arg=None,  # Positional argument
-        ),
-        ConfigParameter(
-            name="date_format",
-            default="%Y-%m-%d",
-            type_=str,
-            help="Date format to use",
-            is_cli=False,
-        ),
-    ]
-
+class ConfigParameterManager:
     def __init__(self, config_file: Optional[str] = None, **kwargs):
         """Initialize configuration from file and/or keyword arguments.
 
@@ -103,7 +14,7 @@ class MboxConverterConfig:
             **kwargs: Override parameters
         """
         # Set defaults
-        for param in self.PARAMETERS:
+        for param in PARAMETERS:
             setattr(self, param.name, param.default)
 
         # Load from file if provided
@@ -162,14 +73,14 @@ class MboxConverterConfig:
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert configuration to dictionary."""
-        return {param.name: getattr(self, param.name) for param in self.PARAMETERS}
+        return {param.name: getattr(self, param.name) for param in PARAMETERS}
 
     @classmethod
     def generate_default_config_file(cls, output_file: str):
         """Generate a default configuration file with all parameters and their descriptions."""
         # Add comments to YAML
         config_data = {}
-        for param in cls.PARAMETERS:
+        for param in PARAMETERS:
             config_data[param.name] = {
                 "value": param.default,
                 "help": param.help,
@@ -184,7 +95,7 @@ class MboxConverterConfig:
             f.write("# mbox_converter Configuration File\n")
             f.write("# This file was auto-generated. Modify as needed.\n\n")
 
-            for param in cls.PARAMETERS:
+            for param in PARAMETERS:
                 f.write(f"# {param.help}\n")
                 if param.choices:
                     f.write(f"# Choices: {', '.join(param.choices)}\n")
@@ -200,7 +111,7 @@ class MboxConverterConfig:
         required_params = []
         optional_params = []
 
-        for param in cls.PARAMETERS:
+        for param in PARAMETERS:
             if not param.is_cli:
                 continue
             cli_arg = f"`--{param.name}`" if param.name != "mbox_file" else "`path/to/file.mbox`"
@@ -305,10 +216,10 @@ def main():
     default_config: str = "../config.yaml"
     default_doc: str = "../docs/usage/cli_api_doc.md"
 
-    MboxConverterConfig.generate_default_config_file(default_config)
+    ConfigParameterManager.generate_default_config_file(default_config)
     print(f"Generated: {default_config}")
 
-    MboxConverterConfig.generate_cli_markdown_doc(default_doc)
+    ConfigParameterManager.generate_cli_markdown_doc(default_doc)
     print(f"Generated: {default_doc}")
 
 
