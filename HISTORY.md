@@ -4,6 +4,35 @@ Changelog
 
 (unreleased)
 ------------
+
+Fix
+~~~
+- Donate. [Paul]
+- Switch to py 3.11 in yml. [Paul]
+
+Other
+~~~~~
+- Feat: add icons. [Paul]
+- Update FUNDING.yml. [Paul Magister]
+- Feat: add icons. [Paul]
+- Feat: add FUNDING.yml. [Paul]
+- Feat: add FUNDING.yml. [Paul]
+- Add nav tree. [Paul]
+- Add codehilite and awesome-nav plugin. [Paul]
+- Restructure make_windows.md. [Paul]
+- Switch to python 3.10. [Paul]
+- Remove nav structure in mkdocs.yml. [Paul]
+- Update README.md from docs/index.md. [github-actions]
+- Use nav structure in mkdocs.yml. [Paul]
+- Update README.md from docs/index.md. [github-actions]
+- Test if new toctree style works. [Paul]
+- Auto-increment patch version as default suggestion on make release.
+  [Paul]
+- New release. [Paul]
+
+
+0.1.17 (2025-06-12)
+-------------------
 - Auto-sync the docs on make docs. [Paul]
 - Update docs. [Paul]
 - Add pre-commit. [Paul]
