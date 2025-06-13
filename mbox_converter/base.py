@@ -5,7 +5,6 @@ import quopri
 import re
 from email.header import decode_header
 from email.utils import mktime_tz, parsedate_tz
-from math import inf
 
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
@@ -83,15 +82,17 @@ def extract_emails(field):
 class MboxConverter:
     def __init__(
         self,
-        mbox_file,
-        include_from=True,
-        include_to=True,
-        include_date=True,
-        include_subject=True,
-        output_format="txt",
-        max_days=inf,
-        date_format=None,
+        config,
     ):
+        mbox_file = getattr(config, "mbox_file")
+        include_from = getattr(config, "sent_from")
+        include_to = getattr(config, "to")
+        include_date = getattr(config, "date")
+        include_subject = getattr(config, "subject")
+        output_format = getattr(config, "format")
+        max_days = getattr(config, "max_days")
+        date_format = None
+
         self.mbox_file = mbox_file
         self.include_options = {
             "from": include_from,

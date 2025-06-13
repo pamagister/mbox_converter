@@ -136,6 +136,6 @@ config = MboxConverterConfig(
 )
 
 # Use with converter
-converter = MboxConverter(**config.get_kwargs())
+converter = MboxConverter(config)
 converter.parse()
 ```

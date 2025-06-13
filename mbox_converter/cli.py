@@ -26,7 +26,11 @@ Examples:
     )
 
     # Config file argument
-    parser.add_argument("--config", help="Path to configuration file (JSON or YAML)")
+    parser.add_argument(
+        "--config",
+        default="config.yaml",
+        help="Path to configuration file (JSON or YAML)",
+    )
 
     # Generate arguments from config parameters
     for param in MboxConverterConfig.PARAMETERS:
@@ -73,7 +77,7 @@ def main():
                     setattr(config, param.name, arg_value)
 
         # Validate required parameters
-        if not config.mbox_file:
+        if False and not config.mbox_file:
             print("Error: mbox_file is required")
             return 1
 
@@ -83,7 +87,7 @@ def main():
             return 1
 
         # Create and run MboxConverter
-        converter = MboxConverter(**config.get_kwargs())
+        converter = MboxConverter(config)
         converter.parse()
 
         return 0

@@ -6,11 +6,8 @@ It can generate config files, CLI modules, and documentation from the parameter 
 
 import json
 from dataclasses import dataclass
-from math import inf
 from pathlib import Path
 from typing import Any, Dict, List, Optional
-
-import yaml
 
 
 @dataclass
@@ -119,6 +116,8 @@ class MboxConverterConfig:
 
         with open(config_path, "r", encoding="utf-8") as f:
             if config_path.suffix.lower() in [".yml", ".yaml"]:
+                import yaml
+
                 config_data = yaml.safe_load(f)
             else:
                 config_data = json.load(f)
@@ -147,6 +146,8 @@ class MboxConverterConfig:
 
         with open(config_path, "w", encoding="utf-8") as f:
             if format_ == "yaml":
+                import yaml
+
                 yaml.dump(config_data, f, default_flow_style=False, indent=2)
             else:
                 json.dump(config_data, f, indent=2)
@@ -154,18 +155,6 @@ class MboxConverterConfig:
     def to_dict(self) -> Dict[str, Any]:
         """Convert configuration to dictionary."""
         return {param.name: getattr(self, param.name) for param in self.PARAMETERS}
-
-    def get_kwargs(self) -> Dict[str, Any]:
-        """Get kwargs suitable for MboxConverter constructor."""
-        return {
-            "mbox_file": self.mbox_file,
-            "include_from": self.sent_from == "ON",
-            "include_to": self.to == "ON",
-            "include_date": self.date == "ON",
-            "include_subject": self.subject == "ON",
-            "output_format": self.format,
-            "max_days": self.max_days if self.max_days > 0 else inf,
-        }
 
     @classmethod
     def generate_default_config_file(cls, output_file: str):
@@ -267,14 +256,13 @@ converter.parse()
 
 
 def main():
-    """Main function to generate config file, CLI module, and documentation."""
+    """Main function to generate config file and documentation."""
     import sys
 
     if len(sys.argv) < 2:
         print("Usage: python config.py <command>")
         print("Commands:")
         print("  generate-config  - Generate default configuration file")
-        print("  generate-cli     - Generate CLI module")
         print("  generate-docs    - Generate Markdown documentation")
         print("  generate-all     - Generate everything")
         return
