@@ -49,7 +49,12 @@ def parse_arguments():
         type=int,
         help="Max number of days per output file (-1 for unlimited) (default: -1)",
     )
-    parser.add_argument("mbox_file", help="Path to mbox file")
+    parser.add_argument(
+        "mbox_file",
+        default="example.mbox",
+        type=str,
+        help="Path to mbox file (default: example.mbox)",
+    )
 
     return parser.parse_args()
 
@@ -58,15 +63,32 @@ def main():
     """Main entry point for the CLI application."""
     args = parse_arguments()
 
-    # Create config from CLI arguments
-    config = MboxConverterConfig()
-    for param in MboxConverterConfig.PARAMETERS:
-        if hasattr(args, param.name):
-            setattr(config, param.name, getattr(args, param.name))
+    # Create config object
+    try:
+        # Load from config file if provided
+        config = MboxConverterConfig('config.yaml')
 
-    # Create and run MboxConverter
-    converter = MboxConverter(**config.get_kwargs())
-    converter.parse()
+        # Override with CLI arguments (only if they differ from defaults)
+        for param in MboxConverterConfig.PARAMETERS:
+            if hasattr(args, param.name):
+                arg_value = getattr(args, param.name)
+                # Only override if the CLI argument was explicitly provided
+                # (i.e., differs from the parameter's default)
+                if arg_value != param.default:
+                    setattr(config, param.name, arg_value)
+
+        # Create and run MboxConverter
+        converter = MboxConverter(**config.get_kwargs())
+        converter.parse()
+
+        return 0
+
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
+        return 1
+    except Exception as e:
+        print(f"Error: {e}")
+        return 1
 
 
 if __name__ == "__main__":
