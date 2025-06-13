@@ -21,6 +21,7 @@ class ConfigParameter:
     help: str = ""
     cli_arg: Optional[str] = None
     required: bool = False
+    is_cli: bool = True
 
     def __post_init__(self):
         if self.cli_arg is None:
@@ -84,6 +85,13 @@ class MboxConverterConfig:
             help="Path to mbox file",
             required=True,
             cli_arg=None,  # Positional argument
+        ),
+        ConfigParameter(
+            name="date_format",
+            default="%Y-%m-%d",
+            type_=str,
+            help="Date format to use",
+            is_cli=False,
         ),
     ]
 
@@ -157,31 +165,111 @@ class MboxConverterConfig:
         return {param.name: getattr(self, param.name) for param in self.PARAMETERS}
 
     @classmethod
-    def generate_default_config_file(cls, output_file: str):
-        """Generate a default configuration file with all parameters and their descriptions."""
-        # Add comments to YAML
-        config_data = {}
+    def generate_cli_markdown_doc(cls, output_file: str):
+        """Generate a Markdown CLI documentation with a formatted table and examples."""
+        from textwrap import dedent
+
+        rows = []
+        required_params = []
+        optional_params = []
+
         for param in cls.PARAMETERS:
-            config_data[param.name] = {
-                "value": param.default,
-                "help": param.help,
-                "type": param.type_.__name__,
-                "choices": param.choices if param.choices else None,
-            }
+            if not param.is_cli:
+                continue
+            cli_arg = f"`--{param.name}`" if param.name != "mbox_file" else "`path/to/file.mbox`"
+            typ = param.type_.__name__
+            desc = param.help
+            default = (
+                "*required*"
+                if getattr(param, "required", False) or param.default in (None, "")
+                else repr(param.default)
+            )
+            choices = ", ".join(param.choices) if param.choices else "-"
 
-        output_path = Path(output_file)
-        output_path.parent.mkdir(parents=True, exist_ok=True)
+            rows.append((cli_arg, typ, desc, default, choices))
+            if default == "*required*":
+                required_params.append(param)
+            else:
+                optional_params.append(param)
 
-        with open(output_path, "w", encoding="utf-8") as f:
-            f.write("# mbox_converter Configuration File\n")
-            f.write("# This file was auto-generated. Modify as needed.\n\n")
+        # Dynamisch Spaltenbreite bestimmen
+        def pad(s, width):
+            return s + " " * (width - len(s))
 
-            for param in cls.PARAMETERS:
-                f.write(f"# {param.help}\n")
-                if param.choices:
-                    f.write(f"# Choices: {', '.join(param.choices)}\n")
-                f.write(f"# Type: {param.type_.__name__}\n")
-                f.write(f"{param.name}: {repr(param.default)}\n\n")
+        widths = [max(len(str(col)) for col in column) for column in zip(*rows)]
+        header = ["Option", "Typ", "Description", "Default", "Choices"]
+
+        # Markdown-Tabelle erstellen
+        table = (
+            "| "
+            + " | ".join(pad(h, w) for h, w in zip(header, widths))
+            + " |\n"
+            + "|-"
+            + "-|-".join("-" * w for w in widths)
+            + "-|\n"
+        )
+        for row in rows:
+            table += "| " + " | ".join(pad(str(col), w) for col, w in zip(row, widths)) + " |\n"
+
+        # Beispielbefehle erzeugen
+        examples = []
+        required_arg = required_params[0].name if required_params else "example.mbox"
+        examples.append(
+            dedent(
+                f"""
+        ### 1. Standard version (only required parameter)
+
+        ```bash
+        python -m mbox_converter.cli {required_arg}
+        ```
+        """
+            )
+        )
+
+        for i in range(1, min(5, len(optional_params) + 1)):
+            selected = optional_params[:i]
+            cli_part = " ".join(
+                f"--{p.name} {p.choices[0] if p.choices else p.default}" for p in selected
+            )
+            examples.append(
+                dedent(
+                    f"""
+            ### {i + 1}. Example with {i} Parameter(s)
+
+            ```bash
+            python -m mbox_converter.cli {cli_part} {required_arg}
+            ```
+            """
+                )
+            )
+
+        markdown = dedent(
+            """
+        # Command line interface
+
+        Command line options
+
+        ```bash
+        python -m mbox_converter.cli [OPTIONS] path/to/file.mbox
+        ```
+
+        ---
+
+        ## ⚙️ CLI-Options
+
+        {}
+
+        ## 💡 Examples
+
+        In the example, the following is assumed: `example.mbox` in the current directory
+
+        {}
+        """
+        ).format(table, "".join(examples))
+
+        Path(output_file).parent.mkdir(parents=True, exist_ok=True)
+        with open(output_file, "w", encoding="utf-8") as f:
+            f.write(markdown.strip())
 
     @classmethod
     def generate_markdown_docs(cls, output_file: str):
@@ -257,27 +345,16 @@ converter.parse()
 
 def main():
     """Main function to generate config file and documentation."""
-    import sys
 
-    if len(sys.argv) < 2:
-        print("Usage: python config.py <command>")
-        print("Commands:")
-        print("  generate-config  - Generate default configuration file")
-        print("  generate-docs    - Generate Markdown documentation")
-        print("  generate-all     - Generate everything")
-        return
+    default_config: str = "../config.yaml"
+    default_doc: str = "../docs/usage/cli_api_doc.md"
 
-    command = sys.argv[1]
-    default_config: str = "mbox_converter/config.yaml"
-    default_doc: str = "docs/usage/cli_api_doc.md"
+    MboxConverterConfig.generate_default_config_file(default_config)
+    print(f"Generated: {default_config}")
 
-    if command == "generate-config" or command == "generate-all":
-        MboxConverterConfig.generate_default_config_file(default_config)
-        print(f"Generated: {default_config}")
-
-    if command == "generate-docs" or command == "generate-all":
-        MboxConverterConfig.generate_markdown_docs(default_doc)
-        print(f"Generated: {default_doc}")
+    # MboxConverterConfig.generate_markdown_docs(default_doc)
+    MboxConverterConfig.generate_cli_markdown_doc(default_doc)
+    print(f"Generated: {default_doc}")
 
 
 if __name__ == "__main__":

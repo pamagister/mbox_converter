@@ -91,7 +91,7 @@ class MboxConverter:
         include_subject = getattr(config, "subject")
         output_format = getattr(config, "format")
         max_days = getattr(config, "max_days")
-        date_format = None
+        date_format = getattr(config, "date_format")
 
         self.mbox_file = mbox_file
         self.include_options = {

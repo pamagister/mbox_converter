@@ -19,7 +19,7 @@ date: 'ON'
 # Include 'Subject' field
 # Choices: ON, OFF
 # Type: str
-subject: 'ON'
+subject: 'OFF'
 
 # Output format: txt or csv
 # Choices: txt, csv
@@ -33,4 +33,8 @@ max_days: 1000
 # Path to mbox file
 # Type: str
 mbox_file: ''
+
+# Date format to use
+# Type: str
+date_format: '%d-%m-%Y'
 

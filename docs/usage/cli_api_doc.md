@@ -1,141 +1,57 @@
-# mbox_converter Configuration Documentation
+# Command line interface
 
-This document describes all available configuration options for the mbox_converter tool.
-
-## Configuration Parameters
-
-### `sent_from`
-
-**Description:** Include 'From' field
-
-**Type:** `str`
-
-**Default:** `'ON'`
-
-**Choices:** `ON`, `OFF`
-
-**CLI Argument:** `--sent_from`
-
----
-
-### `to`
-
-**Description:** Include 'To' field
-
-**Type:** `str`
-
-**Default:** `'ON'`
-
-**Choices:** `ON`, `OFF`
-
-**CLI Argument:** `--to`
-
----
-
-### `date`
-
-**Description:** Include 'Date' field
-
-**Type:** `str`
-
-**Default:** `'ON'`
-
-**Choices:** `ON`, `OFF`
-
-**CLI Argument:** `--date`
-
----
-
-### `subject`
-
-**Description:** Include 'Subject' field
-
-**Type:** `str`
-
-**Default:** `'ON'`
-
-**Choices:** `ON`, `OFF`
-
-**CLI Argument:** `--subject`
-
----
-
-### `format`
-
-**Description:** Output format: txt or csv
-
-**Type:** `str`
-
-**Default:** `'txt'`
-
-**Choices:** `txt`, `csv`
-
-**CLI Argument:** `--format`
-
----
-
-### `max_days`
-
-**Description:** Max number of days per output file (-1 for unlimited)
-
-**Type:** `int`
-
-**Default:** `-1`
-
-**CLI Argument:** `--max_days`
-
----
-
-### `mbox_file`
-
-**Description:** Path to mbox file
-
-**Type:** `str`
-
-**Default:** `''`
-
-**Required:** Yes
-
-**CLI Argument:** `--mbox_file`
-
----
-
-## Usage Examples
-
-### Using Configuration File
+Command line options
 
 ```bash
-# Generate default config file
-python -c "from mbox_converter.config import MboxConverterConfig; MboxConverterConfig.generate_default_config_file()"
-
-# Use config file
-python -m mbox_converter --config mbox_converter_config.yaml
+python -m mbox_converter.cli [OPTIONS] path/to/file.mbox
 ```
 
-### Using CLI Arguments
+---
+
+## ⚙️ CLI-Options
+
+| Option              | Typ | Description                                           | Default    | Choices  |
+|---------------------|-----|-------------------------------------------------------|------------|----------|
+| `--sent_from`       | str | Include 'From' field                                  | 'ON'       | ON, OFF  |
+| `--to`              | str | Include 'To' field                                    | 'ON'       | ON, OFF  |
+| `--date`            | str | Include 'Date' field                                  | 'ON'       | ON, OFF  |
+| `--subject`         | str | Include 'Subject' field                               | 'ON'       | ON, OFF  |
+| `--format`          | str | Output format: txt or csv                             | 'txt'      | txt, csv |
+| `--max_days`        | int | Max number of days per output file (-1 for unlimited) | -1         | -        |
+| `path/to/file.mbox` | str | Path to mbox file                                     | *required* | -        |
+
+
+## 💡 Examples
+
+In the example, the following is assumed: `example.mbox` in the current directory
+
+
+### 1. Standard version (only required parameter)
 
 ```bash
-# Basic usage
-python -m mbox_converter --format csv --max_days 30 /path/to/mailbox.mbox
-
-# Disable certain fields
-python -m mbox_converter --sent_from OFF --subject OFF /path/to/mailbox.mbox
+python -m mbox_converter.cli mbox_file
 ```
 
-### Programmatic Usage
+### 2. Example with 1 Parameter(s)
 
-```python
-from mbox_converter.config import MboxConverterConfig
-from mbox_converter.base import MboxConverter
+```bash
+python -m mbox_converter.cli --sent_from ON mbox_file
+```
 
-# Create config
-config = MboxConverterConfig(
-    mbox_file="/path/to/mailbox.mbox",
-    format="csv",
-    max_days=30
-)
+### 3. Example with 2 Parameter(s)
 
-# Use with converter
-converter = MboxConverter(config)
-converter.parse()
+```bash
+python -m mbox_converter.cli --sent_from ON --to ON mbox_file
+```
+
+### 4. Example with 3 Parameter(s)
+
+```bash
+python -m mbox_converter.cli --sent_from ON --to ON --date ON mbox_file
+```
+
+### 5. Example with 4 Parameter(s)
+
+```bash
+python -m mbox_converter.cli --sent_from ON --to ON --date ON --subject ON mbox_file
 ```
