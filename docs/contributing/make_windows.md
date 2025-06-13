@@ -25,35 +25,84 @@ Git Bash provides a Unix-like shell on Windows. However, it **does not include `
 
 This method allows you to use `make` directly in PowerShell or Command Prompt.
 
-### 📦 Step-by-Step: Installing `make` with Chocolatey
+### Prerequisites
 
-> ⚠️ You must have **Administrator privileges** to install Chocolatey and software packages.
+Before installing GNU Make via Chocolatey, ensure you have Chocolatey package manager installed on your Windows system.
 
-1. Open **PowerShell as Administrator**.
+**To check if Chocolatey is installed:**
+Open PowerShell as Administrator and run:
+```powershell
+choco --version
+```
 
-2. Install Chocolatey by running:
+**If Chocolatey is not installed:**
+
+1. Open PowerShell as Administrator
+2. Run the following command to install Chocolatey:
 
     ```powershell
-    Set-ExecutionPolicy Bypass -Scope Process -Force
-    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
-    iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
     ```
+   
+3. Close and reopen PowerShell as Administrator
 
-3. Close and reopen PowerShell **(or restart your system)**.
+### Installing GNU Make
 
-4. Now install `make`:
+1. **Open PowerShell or Command Prompt as Administrator**
+
+    Press `Win + X` and select "Windows PowerShell (Admin)" or "Command Prompt (Admin)"
+
+2. **Install GNU Make using Chocolatey**
 
     ```powershell
     choco install make
     ```
 
-5. Verify it works:
+3. **Confirm the installation**
+
+    When prompted, type `y` or `yes` to proceed with the installation.
+
+4. **Verify the installation**
+
+5. After installation completes, verify that `make` is available:
 
     ```powershell
     make --version
     ```
+   
+    You should see output similar to:
 
----
+    ```powershell
+    GNU Make 4.x.x
+    Built for Windows32
+    ```
+
+### Usage
+
+Once installed, you can use `make` commands directly in any PowerShell or Command Prompt window:
+
+```powershell
+# Navigate to your project directory
+cd path\to\your\project
+
+# Run make commands
+make
+make build
+make clean
+```
+
+### Troubleshooting
+
+**If `make` command is not recognized:**
+1. Close and reopen your terminal
+2. Check if the installation path is in your system PATH environment variable
+3. Try running `refreshenv` in PowerShell to refresh environment variables
+
+**To uninstall:**
+```powershell
+choco uninstall make
+```
+
 
 ## ✅ Option 3: Manually Add `make` to Git Bash via MSYS2
 
@@ -75,7 +124,7 @@ MSYS2 provides a full Unix toolchain for Windows, including `make`.
     pacman -Syu
     ```
 
-   > 📝 If prompted, close the terminal and re-open it after updating.
+    📝 If prompted, close the terminal and re-open it after updating.
 
 5. Install `make`:
 
@@ -115,9 +164,9 @@ To use `make` in Git Bash (or any terminal), you must add it to your system's PA
 
 6. Test in Git Bash:
 
-   ```bash
-   make --version
-   ```
+    ```bash
+    make --version
+    ```
 
 ---
 
@@ -158,9 +207,9 @@ chmod +x format.sh
 ## 🔚 Summary
 
 | Option     | Description                     | Difficulty |
-| ---------- | ------------------------------- | ---------- |
-| Git Bash   | Use `make` in Unix-like shell   | Medium     |
-| Chocolatey | Use `make` in PowerShell or CMD | Easy       |
-| MSYS2      | Full Unix toolchain for Windows | Medium     |
+| ---------- | ------------------------------- |------------|
+| Git Bash   | Use `make` in Unix-like shell   | Easy       |
+| Chocolatey | Use `make` in PowerShell or CMD | Medium     |
+| MSYS2      | Full Unix toolchain for Windows | Easy       |
 
 Choose the option that best fits your workflow!
