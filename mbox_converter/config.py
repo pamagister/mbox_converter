@@ -5,10 +5,10 @@ It can generate config files, CLI modules, and documentation from the parameter 
 """
 
 import json
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from math import inf
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
 
 import yaml
 
@@ -47,10 +47,18 @@ class MboxConverterConfig:
             help="Include 'From' field",
         ),
         ConfigParameter(
-            name="to", default="ON", type_=str, choices=["ON", "OFF"], help="Include 'To' field"
+            name="to",
+            default="ON",
+            type_=str,
+            choices=["ON", "OFF"],
+            help="Include 'To' field",
         ),
         ConfigParameter(
-            name="date", default="ON", type_=str, choices=["ON", "OFF"], help="Include 'Date' field"
+            name="date",
+            default="ON",
+            type_=str,
+            choices=["ON", "OFF"],
+            help="Include 'Date' field",
         ),
         ConfigParameter(
             name="subject",
@@ -162,8 +170,6 @@ class MboxConverterConfig:
     @classmethod
     def generate_default_config_file(cls, output_file: str):
         """Generate a default configuration file with all parameters and their descriptions."""
-        config = cls()
-
         # Add comments to YAML
         config_data = {}
         for param in cls.PARAMETERS:
@@ -189,83 +195,6 @@ class MboxConverterConfig:
                 f.write(f"{param.name}: {repr(param.default)}\n\n")
 
     @classmethod
-    def generate_cli_module(cls, output_file: str):
-        """Generate CLI module based on parameter definitions."""
-        cli_code = '''"""Auto-generated CLI interface for mbox_converter project.
-
-This file was generated from config.py parameter definitions.
-Do not modify manually - regenerate using MboxConverterConfig.generate_cli_module()
-"""
-
-import argparse
-from math import inf
-from pathlib import Path
-
-from mbox_converter.base import MboxConverter
-from mbox_converter.config import MboxConverterConfig
-
-
-def parse_arguments():
-    """Parse command line arguments based on configuration parameters."""
-    parser = argparse.ArgumentParser(
-        description="Parse mbox file and export to text or CSV.",
-        formatter_class=argparse.RawDescriptionHelpFormatter
-    )
-    
-'''
-
-        # Generate argument definitions
-        for param in cls.PARAMETERS:
-            if param.name == "mbox_file":
-                # Positional argument
-                cli_code += f"    parser.add_argument(\n"
-                cli_code += f'        "mbox_file",\n'
-                cli_code += f'        help="{param.help}"\n'
-                cli_code += f"    )\n"
-            else:
-                # Optional argument
-                cli_code += f"    parser.add_argument(\n"
-                cli_code += f'        "{param.cli_arg}",\n'
-                if param.name.endswith("_"):
-                    cli_code += f'        dest="{param.name}",\n'
-                cli_code += f"        default={repr(param.default)},\n"
-                if param.choices:
-                    cli_code += f"        choices={param.choices},\n"
-                if param.type_ == int:
-                    cli_code += f"        type=int,\n"
-                cli_code += f'        help="{param.help} (default: {param.default})"\n'
-                cli_code += f"    )\n"
-
-        cli_code += '''
-    return parser.parse_args()
-
-
-def main():
-    """Main entry point for the CLI application."""
-    args = parse_arguments()
-    
-    # Create config from CLI arguments
-    config = MboxConverterConfig()
-    for param in MboxConverterConfig.PARAMETERS:
-        if hasattr(args, param.name):
-            setattr(config, param.name, getattr(args, param.name))
-    
-    # Create and run MboxConverter
-    converter = MboxConverter(**config.get_kwargs())
-    converter.parse()
-
-
-if __name__ == "__main__":
-    main()
-'''
-
-        output_path = Path(output_file)
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-
-        with open(output_path, "w", encoding="utf-8") as f:
-            f.write(cli_code)
-
-    @classmethod
     def generate_markdown_docs(cls, output_file: str):
         """Generate Markdown documentation for all configuration parameters."""
         docs = """# mbox_converter Configuration Documentation
@@ -284,7 +213,7 @@ This document describes all available configuration options for the mbox_convert
             if param.choices:
                 docs += f"**Choices:** {', '.join(f'`{choice}`' for choice in param.choices)}\n\n"
             if param.required:
-                docs += f"**Required:** Yes\n\n"
+                docs += "**Required:** Yes\n\n"
             if param.cli_arg:
                 docs += f"**CLI Argument:** `{param.cli_arg}`\n\n"
             docs += "---\n\n"
@@ -353,15 +282,10 @@ def main():
     command = sys.argv[1]
     default_config: str = "mbox_converter/config.yaml"
     default_doc: str = "docs/usage/cli_api_doc.md"
-    default_cli: str = "mbox_converter/cli.py"
 
     if command == "generate-config" or command == "generate-all":
         MboxConverterConfig.generate_default_config_file(default_config)
         print(f"Generated: {default_config}")
-
-    if command == "generate-cli" or command == "generate-all":
-        MboxConverterConfig.generate_cli_module(default_cli)
-        print(f"Generated: {default_cli}")
 
     if command == "generate-docs" or command == "generate-all":
         MboxConverterConfig.generate_markdown_docs(default_doc)

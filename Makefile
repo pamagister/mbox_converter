@@ -27,11 +27,13 @@ lock:           ## builds the uv.lock file and syncs the packages
 .PHONY: precommit
 precommit: ## Format, test and check dependencies.
 	$(MAKE) fmt
+	$(MAKE) lint
 	$(MAKE) test
 	$(MAKE) deptry
 
 .PHONY: fmt
 fmt:              ## Format code using black & isort.
+	uv run ruff format
 	uv run isort mbox_converter/
 	uv run black -l 100 mbox_converter/
 	uv run black -l 100 tests/

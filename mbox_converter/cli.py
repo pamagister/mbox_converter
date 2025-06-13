@@ -5,7 +5,6 @@ Do not modify manually - regenerate using MboxConverterConfig.generate_cli_modul
 """
 
 import argparse
-from math import inf
 from pathlib import Path
 
 from mbox_converter.base import MboxConverter
@@ -36,7 +35,10 @@ Examples:
             parser.add_argument("mbox_file", help=param.help)
         else:
             # Optional argument
-            kwargs = {"default": param.default, "help": f"{param.help} (default: {param.default})"}
+            kwargs = {
+                "default": param.default,
+                "help": f"{param.help} (default: {param.default})",
+            }
 
             if param.name.endswith("_"):
                 kwargs["dest"] = param.name
@@ -69,10 +71,6 @@ def main():
                 # (i.e., differs from the parameter's default)
                 if arg_value != param.default:
                     setattr(config, param.name, arg_value)
-
-        # Create and run MboxConverter
-        converter = MboxConverter(**config.get_kwargs())
-        converter.parse()
 
         # Validate required parameters
         if not config.mbox_file:
