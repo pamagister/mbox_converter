@@ -165,6 +165,33 @@ class MboxConverterConfig:
         return {param.name: getattr(self, param.name) for param in self.PARAMETERS}
 
     @classmethod
+    def generate_default_config_file(cls, output_file: str):
+        """Generate a default configuration file with all parameters and their descriptions."""
+        # Add comments to YAML
+        config_data = {}
+        for param in cls.PARAMETERS:
+            config_data[param.name] = {
+                "value": param.default,
+                "help": param.help,
+                "type": param.type_.__name__,
+                "choices": param.choices if param.choices else None,
+            }
+
+        output_path = Path(output_file)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write("# mbox_converter Configuration File\n")
+            f.write("# This file was auto-generated. Modify as needed.\n\n")
+
+            for param in cls.PARAMETERS:
+                f.write(f"# {param.help}\n")
+                if param.choices:
+                    f.write(f"# Choices: {', '.join(param.choices)}\n")
+                f.write(f"# Type: {param.type_.__name__}\n")
+                f.write(f"{param.name}: {repr(param.default)}\n\n")
+
+    @classmethod
     def generate_cli_markdown_doc(cls, output_file: str):
         """Generate a Markdown CLI documentation with a formatted table and examples."""
         from textwrap import dedent
@@ -271,77 +298,6 @@ class MboxConverterConfig:
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(markdown.strip())
 
-    @classmethod
-    def generate_markdown_docs(cls, output_file: str):
-        """Generate Markdown documentation for all configuration parameters."""
-        docs = """# mbox_converter Configuration Documentation
-
-This document describes all available configuration options for the mbox_converter tool.
-
-## Configuration Parameters
-
-"""
-
-        for param in cls.PARAMETERS:
-            docs += f"### `{param.name}`\n\n"
-            docs += f"**Description:** {param.help}\n\n"
-            docs += f"**Type:** `{param.type_.__name__}`\n\n"
-            docs += f"**Default:** `{repr(param.default)}`\n\n"
-            if param.choices:
-                docs += f"**Choices:** {', '.join(f'`{choice}`' for choice in param.choices)}\n\n"
-            if param.required:
-                docs += "**Required:** Yes\n\n"
-            if param.cli_arg:
-                docs += f"**CLI Argument:** `{param.cli_arg}`\n\n"
-            docs += "---\n\n"
-
-        docs += """## Usage Examples
-
-### Using Configuration File
-
-```bash
-# Generate default config file
-python -c "from mbox_converter.config import MboxConverterConfig; MboxConverterConfig.generate_default_config_file()"
-
-# Use config file
-python -m mbox_converter --config mbox_converter_config.yaml
-```
-
-### Using CLI Arguments
-
-```bash
-# Basic usage
-python -m mbox_converter --format csv --max_days 30 /path/to/mailbox.mbox
-
-# Disable certain fields
-python -m mbox_converter --sent_from OFF --subject OFF /path/to/mailbox.mbox
-```
-
-### Programmatic Usage
-
-```python
-from mbox_converter.config import MboxConverterConfig
-from mbox_converter.base import MboxConverter
-
-# Create config
-config = MboxConverterConfig(
-    mbox_file="/path/to/mailbox.mbox",
-    format="csv",
-    max_days=30
-)
-
-# Use with converter
-converter = MboxConverter(**config.get_kwargs())
-converter.parse()
-```
-"""
-
-        output_path = Path(output_file)
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-
-        with open(output_path, "w", encoding="utf-8") as f:
-            f.write(docs)
-
 
 def main():
     """Main function to generate config file and documentation."""
@@ -352,7 +308,6 @@ def main():
     MboxConverterConfig.generate_default_config_file(default_config)
     print(f"Generated: {default_config}")
 
-    # MboxConverterConfig.generate_markdown_docs(default_doc)
     MboxConverterConfig.generate_cli_markdown_doc(default_doc)
     print(f"Generated: {default_doc}")
 
