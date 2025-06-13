@@ -11,6 +11,7 @@ dependencies = [
     "beautifulsoup4 ==4.13.4",
     "dotenv>=0.9.9",
     "email-reply-parser ==0.5.12",
+    "types-pyyaml>=6.0.12.20250516",
 ]
 
 # Dev dependencies as optional dependencies
@@ -27,6 +28,7 @@ dev = [
     "gitchangelog>=3.0.4",
     "pyinstaller>=5.8",
     "pre-commit>=4.2.0",
+    "ruff>=0.11.13"
 ]
 
 docs = [
@@ -45,4 +47,3 @@ mbox_gui = "mbox_converter.gui:run_gui"
 
 [tool.deptry]
 pep621_dev_dependency_groups = ["dev", "docs"]
-
