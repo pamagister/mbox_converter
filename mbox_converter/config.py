@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 from typing import Any, Dict, Optional
 
+import yaml  # type: ignore
+
 from mbox_converter.parameters import PARAMETERS
 
 
@@ -35,8 +37,6 @@ class ConfigParameterManager:
 
         with open(config_path, "r", encoding="utf-8") as f:
             if config_path.suffix.lower() in [".yml", ".yaml"]:
-                import yaml
-
                 config_data = yaml.safe_load(f)
             else:
                 config_data = json.load(f)
@@ -65,8 +65,6 @@ class ConfigParameterManager:
 
         with open(config_path, "w", encoding="utf-8") as f:
             if format_ == "yaml":
-                import yaml
-
                 yaml.dump(config_data, f, default_flow_style=False, indent=2)
             else:
                 json.dump(config_data, f, indent=2)
