@@ -1,7 +1,6 @@
-# Cli legacy
+# Command line interface
 
 Command line options
-
 
 ```bash
 python -m mbox_converter.cli [OPTIONS] path/to/file.mbox
@@ -11,44 +10,48 @@ python -m mbox_converter.cli [OPTIONS] path/to/file.mbox
 
 ## ⚙️ CLI-Options
 
-| Option              | Typ        | Description                                                               | Default value  |
-| ------------------- |------------|---------------------------------------------------------------------------|----------------|
-| `--from`            | `ON/OFF`   | Outputs the sender address                                                | `ON`           |
-| `--to`              | `ON/OFF`   | Outputs the recipient address                                             | `ON`           |
-| `--date`            | `ON/OFF`   | Outputs the shipping date                                                 | `ON`           |
-| `--subject`         | `ON/OFF`   | Outputs the subject                                                       | `ON`           |
-| `--format`          | `txt/csv`  | Defines the output format (text file or CSV file)                         | `txt`          |
-| `--max_days`        | Number     | Maximum number of days per output file (e.g. '7' for weekly splits)       | `inf`          |
-| `path/to/file.mbox` | File       | Path to the MBOX file to be processed                                     | *required* |
-
+| Option              | Typ  | Description                                           | Default    | Choices        |
+|---------------------|------|-------------------------------------------------------|------------|----------------|
+| `--sent_from`       | bool | Include 'From' field                                  | True       | [True, False]  |
+| `--to`              | bool | Include 'To' field                                    | True       | [True, False]  |
+| `--date`            | bool | Include 'Date' field                                  | True       | [True, False]  |
+| `--subject`         | bool | Include 'Subject' field                               | True       | [True, False]  |
+| `--format`          | str  | Output format: txt or csv                             | 'txt'      | ['txt', 'csv'] |
+| `--max_days`        | int  | Max number of days per output file (-1 for unlimited) | -1         | -              |
+| `path/to/file.mbox` | str  | Path to mbox file                                     | *required* | -              |
 
 
 ## 💡 Examples
 
 In the example, the following is assumed: `example.mbox` in the current directory
 
-### 1. standard version (all fields, text format)
+
+### 1. Standard version (only required parameter)
 
 ```bash
-python -m mbox_converter.cli example.mbox
+python -m mbox_converter.cli mbox_file
 ```
 
-### 2. sender & subject only, in CSV format
+### 2. Example with 1 Parameter(s)
 
 ```bash
-python -m mbox_converter.cli --to OFF --date OFF --format csv example.mbox
+python -m mbox_converter.cli --sent_from True mbox_file
 ```
 
-### 3. grouping of issues by week (7 days per file)
+### 3. Example with 2 Parameter(s)
 
 ```bash
-python -m mbox_converter.cli --max_days 7 example.mbox
+python -m mbox_converter.cli --sent_from True --to True mbox_file
 ```
 
-### 4. complete control (subject only, CSV, grouped daily)
+### 4. Example with 3 Parameter(s)
 
 ```bash
-python -m mbox_converter.cli --sent_from OFF --to OFF --date OFF --format csv --max_days 1 example.mbox
+python -m mbox_converter.cli --sent_from True --to True --date True mbox_file
 ```
 
----
+### 5. Example with 4 Parameter(s)
+
+```bash
+python -m mbox_converter.cli --sent_from True --to True --date True --subject True mbox_file
+```

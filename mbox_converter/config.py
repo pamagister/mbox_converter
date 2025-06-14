@@ -212,7 +212,7 @@ def main():
     """Main function to generate config file and documentation."""
 
     default_config: str = "../config.yaml"
-    default_doc: str = "../docs/usage/cli_api_doc.md"
+    default_doc: str = "../docs/usage/cli.md"
 
     ConfigParameterManager.generate_default_config_file(default_config)
     print(f"Generated: {default_config}")
