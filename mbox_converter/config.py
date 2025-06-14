@@ -96,7 +96,7 @@ class ConfigParameterManager:
             for param in PARAMETERS:
                 f.write(f"# {param.help}\n")
                 if param.choices:
-                    f.write(f"# Choices: {', '.join(param.choices)}\n")
+                    f.write(f"# Choices: {str(param.choices)}\n")
                 f.write(f"# Type: {param.type_.__name__}\n")
                 f.write(f"{param.name}: {repr(param.default)}\n\n")
 
@@ -120,7 +120,7 @@ class ConfigParameterManager:
                 if getattr(param, "required", False) or param.default in (None, "")
                 else repr(param.default)
             )
-            choices = ", ".join(param.choices) if param.choices else "-"
+            choices = str(param.choices) if param.choices else "-"
 
             rows.append((cli_arg, typ, desc, default, choices))
             if default == "*required*":

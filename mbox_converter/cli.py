@@ -22,7 +22,7 @@ Examples:
   %(prog)s mailbox.mbox
   %(prog)s --config config.yaml mailbox.mbox
   %(prog)s --format csv --max-days 30 mailbox.mbox
-  %(prog)s --from OFF --subject OFF mailbox.mbox
+  %(prog)s --from False --subject False mailbox.mbox
         """,
     )
 
@@ -89,7 +89,7 @@ def main():
 
         # Create and run MboxConverter
         converter = MboxConverter(config)
-        converter.parse()
+        converter.convert()
 
         return 0
 

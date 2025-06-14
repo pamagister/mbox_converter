@@ -15,7 +15,7 @@ class ConfigParameter:
     name: str
     default: Any
     type_: type
-    choices: Optional[List[str]] = None
+    choices: Optional[List[str | bool]] = None
     help: str = ""
     cli_arg: Optional[str] = None
     required: bool = False
@@ -34,30 +34,30 @@ This serves as the single source of truth for configuration management.
 PARAMETERS = [
     ConfigParameter(
         name="sent_from",
-        default="ON",
-        type_=str,
-        choices=["ON", "OFF"],
+        default=True,
+        type_=bool,
+        choices=[True, False],
         help="Include 'From' field",
     ),
     ConfigParameter(
         name="to",
-        default="ON",
-        type_=str,
-        choices=["ON", "OFF"],
+        default=True,
+        type_=bool,
+        choices=[True, False],
         help="Include 'To' field",
     ),
     ConfigParameter(
         name="date",
-        default="ON",
-        type_=str,
-        choices=["ON", "OFF"],
+        default=True,
+        type_=bool,
+        choices=[True, False],
         help="Include 'Date' field",
     ),
     ConfigParameter(
         name="subject",
-        default="ON",
-        type_=str,
-        choices=["ON", "OFF"],
+        default=True,
+        type_=bool,
+        choices=[True, False],
         help="Include 'Subject' field",
     ),
     ConfigParameter(

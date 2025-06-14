@@ -2,27 +2,27 @@
 # This file was auto-generated. Modify as needed.
 
 # Include 'From' field
-# Choices: ON, OFF
-# Type: str
-sent_from: 'ON'
+# Choices: [True, False]
+# Type: bool
+sent_from: True
 
 # Include 'To' field
-# Choices: ON, OFF
-# Type: str
-to: 'ON'
+# Choices: [True, False]
+# Type: bool
+to: True
 
 # Include 'Date' field
-# Choices: ON, OFF
-# Type: str
-date: 'ON'
+# Choices: [True, False]
+# Type: bool
+date: True
 
 # Include 'Subject' field
-# Choices: ON, OFF
-# Type: str
-subject: 'OFF'
+# Choices: [True, False]
+# Type: bool
+subject: False
 
 # Output format: txt or csv
-# Choices: txt, csv
+# Choices: ['txt', 'csv']
 # Type: str
 format: 'txt'
 

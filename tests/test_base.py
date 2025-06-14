@@ -119,7 +119,7 @@ def test_parse_creates_output(mock_open, mock_mbox, mocker):
 
     config = ConfigParameterManager()
     parser = MboxConverter(config)
-    parser.parse()
+    parser.convert()
 
     assert mock_open.called
     # assert mock_file.write.called
@@ -150,6 +150,6 @@ def test_max_days_split(mocker):
     config = ConfigParameterManager()
     config.max_days = 2
     parser = MboxConverter(config)
-    parser.parse()
+    parser.convert()
 
     assert mock_open.call_count >= 2  # Should open two output files

@@ -89,7 +89,7 @@ class MboxConverterGui:
         )
 
         try:
-            parser.parse()
+            parser.convert()
             messagebox.showinfo("Done", "Parsing completed successfully.")
         except Exception as e:
             messagebox.showerror("Error", str(e))

@@ -136,7 +136,7 @@ class MboxConverter:
         fields.append(f'"{content}"')
         return fields
 
-    def parse(self):
+    def convert(self):
         base_output_name = os.path.splitext(os.path.basename(self.mbox_file))[0]
         output_template = f"{base_output_name}_{{:03d}}.{self.output_format}"
 
