@@ -54,7 +54,10 @@ Examples:
             if param.type_ == int:
                 kwargs["type"] = int
 
-            parser.add_argument(param.cli_arg, **kwargs)
+            if param.type_ == bool:
+                kwargs["type"] = bool
+
+    parser.add_argument(param.cli_arg, **kwargs)
 
     return parser.parse_args()
 
